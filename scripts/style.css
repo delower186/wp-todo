@@ -1,0 +1,13 @@
+/**
+* @package wptodo
+*/
+@import url('jquery.datatables.min.css');
+
+.solved{
+    color: MediumSeaGreen;
+    text-decoration: line-through;
+}
+.closed{
+    color: #ff6347;
+    text-decoration: line-through;
+}

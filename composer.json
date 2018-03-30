@@ -1,0 +1,17 @@
+{
+    "name": "WP To Do",
+    "description": "Wordpress To Do list for users",
+    "type": "project",
+    "license": "GPLv2 or later",
+    "authors": [
+        {
+            "name": "Delower",
+            "email": "admin@247-assistant.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":{
+        "psr-4": {"Inc\\": "./inc"}
+    }
+}
