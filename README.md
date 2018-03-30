@@ -46,16 +46,11 @@ Plugin's default Permissions?
 
 == Changelog ==
 
-WPToDo 1.0.1
+WP To Do 1.0.1
 This is the very first version of WP To Do.
 
 == Upgrade Notice ==
 
-WPToDo 1.0.1
+WP To Do 1.0.1
 This is the very first version of WP To Do.
 
-== Screenshots ==
-
-1. "WP To Do" List dashboard page with "Add New Task" form.
-2. "WP To Do" List edit task page.
-3. "WP To Do" List view task details and comment page.
