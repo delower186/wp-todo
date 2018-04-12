@@ -6,7 +6,7 @@
 Plugin Name: WP To Do
 Plugin URI: http://www.247-assistant.com/dev/
 Description: A full featured plugin for creating and managing a "to do" list.
-Version:1.0.1
+Version:1.1.0
 Author: Delower
 Author URI: http://www.247-assistant.com
 License: GPLv2 or later

@@ -1,18 +1,22 @@
 	<div class="wrap">
-		<h2><?php _e("To Do Management", 'wptodo'); ?></h2>
-		<h3><?php _e('Analyze tasks & Take Action!', 'wptodo'); ?></h3>
-		<table id="todo" class="widefat display">
+		<br>
+		<h2 class="text-center"><?php _e("To Do Management", 'wptodo'); ?></h2>
+		<br>
+		<?php 
+		\Inc\Pages\Admin::wptodo_add_button();
+		?>
+		<table id="todo" class="table table-striped table-bordered table-responsive" style="width:100%">
 		  <thead>
 		  <tr>
-		    <th scope="col">ID</th>
-		    <th scope="col">Title</th>
-		    <th scope="col">Submitter</th>
-			<th scope="col">Asigned</th>
-			<th scope="col">Added</th>
-			<th scope="col">Deadline</th>
-			<th scope="col">Status</th>
-			<th scope="col">Priority</th>
-			<th scope="col">Notify</th>
+		    <th>ID</th>
+		    <th>Title</th>
+		    <th>Submitter</th>
+			<th>Asigned</th>
+			<th>Added</th>
+			<th>Deadline</th>
+			<th>Status</th>
+			<th>Priority</th>
+			<th>Notify</th>
 		  </tr>
 		  </thead>
 		  <tbody>

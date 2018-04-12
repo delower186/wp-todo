@@ -22,6 +22,7 @@ class Model extends BaseController
 		// where and what we will store - db structure
 		$wptodo_table = self::$wpdb->prefix . "wptodo";
 		$wptodo_comments_table = self::$wpdb->prefix . "wptodo_comments";
+		$wptodo_email_table = self::$wpdb->prefix . "wptodo_email";
 		$wptodo_structure = "
 		CREATE TABLE IF NOT EXISTS `$wptodo_table` (
 			`id` BIGINT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT ,
@@ -46,11 +47,24 @@ class Model extends BaseController
 			`from` BIGINT( 20 ) UNSIGNED NOT NULL ,
 			PRIMARY KEY ( `id` )
 		) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci";
+
+		$wptodo_email_structure = "
+		CREATE TABLE IF NOT EXISTS `$wptodo_email_table` (
+			`id` BIGINT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT ,
+			`subject` TEXT NOT NULL,
+			`body` TEXT NOT NULL ,
+			PRIMARY KEY ( `id` )
+		) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci";
 		
 		// Sending all this to mysql queries
 		self::$wpdb->query($wptodo_structure);
 		self::$wpdb->query($wptodo_comments_structure);
+		self::$wpdb->query($wptodo_email_structure);
 		$today_date = gmdate('Y-m-d');
+
+		//sample email template
+		self::$wpdb->query("INSERT INTO `$wptodo_email_table` (`subject`, `body`)
+		VALUES('Notification','Hi, One task has been updated on your website!')");
 	}
 	/**
 	 * Users id -> nicename
@@ -76,15 +90,53 @@ class Model extends BaseController
 			return $to->user_email;
 		}
 	}
-
+	/**
+	 * saving email messages into database
+	 */
+	public static function wptodo_message_retrieve(){
+		$wptodo_email_table = self::$wpdb->prefix . "wptodo_email";
+		$wptodo_query = "SELECT `subject`, `body` FROM $wptodo_email_table";
+		$results = self::$wpdb->get_results($wptodo_query);
+		if($results){
+			return $results; 
+		}
+	}
+	/**
+	 * saving email messages into database
+	 */
+	public static function wptodo_message(array $email){
+			$wptodo_email_table = self::$wpdb->prefix . "wptodo_email";
+			$wptodo_query = "UPDATE `".$wptodo_email_table."` SET `subject` = '".$email['subject']."', `body` = '".$email['body']."'";
+			self::$wpdb->query($wptodo_query);
+	}
 	/**
 	 * send email
 	 */
-	public static function wptodo_email(){
-		$to = self::wptodo_to($_POST['wptodo_for']);
-		$subject = __('New Task','wptodo');
-		$message = __( 'You are asigned to a new task!', 'wptodo' );
-		wp_mail( $to, $subject, $message );
+	public static function wptodo_email(int $from = null, int $for = null){
+		//get subject and body
+		$results = self::wptodo_message_retrieve();
+		foreach($results as $result){
+			$subject = __($result->subject,'wptodo');
+			$message = __($result->body, 'wptodo' );
+		}
+		//recepient array
+		$admin = get_option('admin_email');
+		if(isset($_POST['wptodo_notify'])){
+			$editor = self::wptodo_to($_POST['wptodo_for']);
+			$tos = array($admin,$editor);
+		}else if(isset($for) && isset($from)){
+			$assigned_to = self::wptodo_to($for);
+			$created_by = self::wptodo_to($from);
+			$tos = array($admin,$assigned_to, $created_by);
+		}else{
+			$tos = array($admin);
+		}
+		$headers = array('Content-Type: text/html; charset=UTF-8');
+		require_once(parent::$plugin_path . 'templates/email.php');
+		//send notificaiton to each of the recepient
+		foreach($tos as $to){
+			wp_mail( $to, $subject, $html, $headers );
+		}
 	}
 	/**
 	 * Displaying a nicer date
@@ -153,7 +205,7 @@ class Model extends BaseController
 		self::$wpdb->query($wptodo_query);
 		self::wptodo_email();
 
-		echo '<script>window.location.href="admin.php?page=wp-todo"</script>';
+		//echo '<script>window.location.href="?page=wp-todo"</script>';
 	}
 	/**
 	 * Delete a task
@@ -164,7 +216,7 @@ class Model extends BaseController
 			$wptodo_comments_table = self::$wpdb->prefix . "wptodo_comments";
 			$q = self::$wpdb->query("DELETE FROM `".$wptodo_table."` WHERE `id`=$id");
 			self::$wpdb->query("DELETE FROM `".$wptodo_comments_table."` WHERE `task`=$id");
-			echo '<script>window.location.href="admin.php?page=wp-todo"</script>';
+			echo '<script>window.location.href="?page=wp-todo"</script>';
 		}
 	}
 	/**
@@ -175,6 +227,7 @@ class Model extends BaseController
 		$today_date = gmdate('Y-m-d');
 		self::$wpdb->query("INSERT INTO $wptodo_comments_table(`id`, `date`, `task`, `body`, `from`)
 		VALUES(NULL, '$today_date', '".$newdata['wptodo_comment_task']."', '".$newdata['wptodo_comment_body']."', '".$newdata['wptodo_comment_author']."')");
+
 	}
 	/**
 	 * Edit a task
@@ -231,15 +284,16 @@ class Model extends BaseController
 	public static function wptodo_settings(){
 		require_once(parent::$plugin_path . 'templates/settings.php');
 	}
-	//vew taks
+	// redirect to tasks
 	public static function wptodo_edit_task(int $id){
 		$edit = '';
 		//$role = Admin::get_role();
 		//if($role == 'administrator' || $role == 'editor'){
-			$edit = '(<a href="?page=wp-todo&edit='.$id.'">Edit</a>)';
+			$edit = '<a href="?page=wp-todo&edit='.$id.'" >Edit</a>';
 		//}
 		return $edit;
 	}
+
 	public static function wptodo_tasks(){
 		$wptodo_table = self::$wpdb->prefix . "wptodo";
 		$wptodo_manage_items = self::$wpdb->get_results("SELECT * FROM $wptodo_table ORDER BY `priority` DESC");
@@ -248,19 +302,19 @@ class Model extends BaseController
 				while($num != $wptodo_counted) {
 					switch ($wptodo_manage_items[$num]->status) {
 						case 4:
-								echo "<tr class= 'solved'>";
+								echo "<tr class= 'text-success'>";
 							  	echo "<td>".$wptodo_manage_items[$num]->id."</td>";
-							  	echo "<td><span style=\"float:right; display: inline;\">".self::wptodo_edit_task($wptodo_manage_items[$num]->id)."</span><a class='solved' href=\"?page=wp-todo&view=".$wptodo_manage_items[$num]->id."\">".$wptodo_manage_items[$num]->title."</a></td>";
+							  	echo "<td><span class=\"badge badge-warning\" style=\"float:right; display: inline;\">".self::wptodo_edit_task($wptodo_manage_items[$num]->id)."</span><a class='text-success' href=\"?page=wp-todo&view=".$wptodo_manage_items[$num]->id."\">".$wptodo_manage_items[$num]->title."</a></td>";
 							break;
 						case 5:
-								echo "<tr class= 'closed'>";
+								echo "<tr class= 'text-danger'>";
 							  	echo "<td>".$wptodo_manage_items[$num]->id."</td>";
-							  	echo "<td><span style=\"float:right; display: inline;\">".self::wptodo_edit_task($wptodo_manage_items[$num]->id)."</span><a class='closed' href=\"?page=wp-todo&view=".$wptodo_manage_items[$num]->id."\">".$wptodo_manage_items[$num]->title."</a></td>";
+							  	echo "<td><span class=\"badge badge-warning\" style=\"float:right; display: inline;\">".self::wptodo_edit_task($wptodo_manage_items[$num]->id)."</span><a class='text-danger' href=\"?page=wp-todo&view=".$wptodo_manage_items[$num]->id."\">".$wptodo_manage_items[$num]->title."</a></td>";
 							break;
 						default:
 							echo "<tr>";
 						  	echo "<td>".$wptodo_manage_items[$num]->id."</td>";
-						  	echo "<td><span style=\"float:right; display: inline;\">".self::wptodo_edit_task($wptodo_manage_items[$num]->id)."</span><a href=\"?page=wp-todo&view=".$wptodo_manage_items[$num]->id."\">".$wptodo_manage_items[$num]->title."</a></td>";
+						  	echo "<td><span class=\"badge badge-warning\" style=\"float:right; display: inline;\">".self::wptodo_edit_task($wptodo_manage_items[$num]->id)."</span><a href=\"?page=wp-todo&view=".$wptodo_manage_items[$num]->id."\">".$wptodo_manage_items[$num]->title."</a></td>";
 							break;
 					}
 

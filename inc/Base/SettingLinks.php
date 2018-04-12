@@ -15,7 +15,7 @@ class SettingLinks extends BaseController
 
 	public function settings_link($links){
 		//add custom setting link
-		$settings_link = '<a href="admin.php?page=wp-todo">GO>></a>';
+		$settings_link = '<a href="admin.php?page=wptodo_settings">Settings</a>';
 		array_push($links, $settings_link);
 		return $links;
 	}

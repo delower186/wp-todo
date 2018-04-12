@@ -16,6 +16,7 @@ class Admin extends BaseController
 
 	public function __construct(){
 		$this->settings = new SettingsApi();
+		add_shortcode( 'wp-todo', array($this, 'wptodo_short_main') );
 	}
 
 	public function register(){
@@ -35,14 +36,14 @@ class Admin extends BaseController
 		);
 
 		$this->subpages = array(
-			// array(
-			// 	'parent_slug' => 'wptodo',
-			// 	'page_title' => __('', 'wptodo'),
-			// 	'menu_title' => __('', 'wptodo'),
-			// 	'capability' => 'manage_options',
-			// 	'menu_slug' =>  '',
-			// 	'function' =>  array($this, '')
-			// )
+			array(
+				'parent_slug' => 'wp-todo',
+				'page_title' => __('Settings', 'wptodo'),
+				'menu_title' => __('Settings', 'wptodo'),
+				'capability' => 'manage_options',
+				'menu_slug' =>  'wptodo_settings',
+				'function' =>  array($this, 'wptodo_settings')
+			)
 		);
 		$this->settings->AddPage( $this->pages )->register();
 		$this->settings->AddSubPage( $this->subpages )->register();
@@ -78,6 +79,13 @@ class Admin extends BaseController
 		}
 	}
 
+	public static function wptodo_add_button(){
+		$role =self::get_role();
+		if($role == 'administrator' || $role == 'editor'){
+			echo '<button type="button" style="margin-right: 13px" class="btn btn-success float-right" data-toggle="modal" data-target="#addTask">Add Task</button><br><br>';
+		}
+	}
+
 	public static function wptodo_delete_button($delete){
 		$role =self::get_role();
 		if($role == 'administrator'){
@@ -85,4 +93,50 @@ class Admin extends BaseController
 		}
 	}
 
+	public function wptodo_short_main(){
+		return Model::wptodo_manage();
+	}
+
+	// redirect to tasks
+	public static function wptodo_cancel(){
+		if(isset($_POST['cancel'])){
+			echo '<script>window.location.href="?page=wp-todo"</script>';
+		}
+	}
+
+	//countdown timer
+	public static function wptodo_countdown_timer($item,$status){
+			$now = date('Y-m-d H:i:s');
+			$deadline = $item;
+			$timefirst = strtotime($now);
+			$timesecond = strtotime("$deadline 00:00:00");
+			$difference = $timesecond - $timefirst;
+		?>
+			<script type="text/javascript">
+				//countdown timer
+				jQuery(document).ready(function(){
+					var clock = jQuery('#timer').FlipClock(<?php echo $difference; ?>, {
+						clockFace: 'DailyCounter',
+						countdown: true
+					});
+					if(0 > <?php echo $difference; ?>){
+						clock.setTime(0);
+						jQuery("#timer").replaceWith(function(n){
+				            return '<div class="alert alert-danger font-weight-bold"> <strong>Danger!</strong> This Task is OverDue </div>';
+				        });
+					}else if( <?php echo $status; ?> == 5){
+						clock.setTime(0);
+						jQuery("#timer").replaceWith(function(n){
+				            return '<div class="alert alert-info"> <strong>Info!</strong> This Task is Closed </div>';
+				        });
+					}else if(<?php echo $status; ?> == 4){
+						clock.setTime(0);
+						jQuery("#timer").replaceWith(function(n){
+				            return '<div class="alert alert-success"> <strong>Success!</strong> This Task is Solved </div>';
+				        });
+					}
+				});
+			</script>
+		<?php
+	}
 }
