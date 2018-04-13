@@ -4,7 +4,7 @@ Donate link: https://www.2checkout.com/checkout/purchase?sid=103083454&quantity=
 Tags: todo, task, project management, to do list, todo list, project management, todo, todo list, task, basecamp, milestone, message, file, comment, client, team, tracking, planning, lists, reporting, project management plugin for wordpress, project manager, project manager plugin for wordpress, wordpress project management
 Requires at least: 4.0
 Tested up to: 4.9.5
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 Requires PHP: 5.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -21,7 +21,7 @@ You will be able to Add Task to the List and assign those to registered users. T
 
 You can show To Do List Management in the Frontend as well with placing a simple shortcode [wp-todo], no hassle to allow other users' to enter your Private Administration Area!
 
-==Features==
+== Features ==
 * Add as many Task to the list as you want with title, description, deadline, status, Priority etc
 * Add tasks, assign users, assign due date
 * Countdown Timer shows how many days, hours, minutes & seconds left
@@ -35,17 +35,16 @@ You can show To Do List Management in the Frontend as well with placing a simple
 * Customizable E-mail Template
 * Shortcode to use WP To Do from frontend.
 
-= Shortcodes =
-To use the plugin from frontend use the following shortcode
+== Shortcodes ==
 * [wp-todo]
 
-= Detailed Walkthrough =
+== Detailed Walkthrough ==
 [youtube https://www.youtube.com/watch?v=GRk25Yq6yNY&t=]
 
-= Contribute =
+== Contribute ==
 This may have bugs and lack of many features. If you want to contribute on this project, you are more than welcome. Please fork the repository from [Github](https://github.com/delower186/wp-todo).
 
-= Donate =
+== Donate ==
 Please [donate](https://www.2checkout.com/checkout/purchase?sid=103083454&quantity=1&product_id=1) for this awesome plugin to continue it's development to bring more awesome features.
 
 == Installation ==
@@ -66,12 +65,17 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 
 == Changelog ==
 
-= 1.1.1 - April 14, 2018 =
+= 1.1.2 =
+
+* Fixed bug
+
+
+= 1.1.1 =
 
 * Fixed Button Position on edit & view page
 
 
-= 1.1.0 - April 12, 2018 =
+= 1.1.0 =
 
 * Countdown Timer Added
 * Customizable E-mail template added
@@ -79,8 +83,10 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 * Bootstrap 4 Layout added
 * Add Task From Bootstrap Modal
 
-= 1.0.1 - March 24, 2018 =
+= 1.0.1 =
+
 This is the very first version of WP To Do.
+
 
 == Upgrade Notice ==
 Upgrade for better performance & Awesome new features
