@@ -53,17 +53,31 @@
 						<label class="font-weight-bold" for="wptodo_notify">Send alerts through email?</label>
 						<input name="wptodo_notify" id="wptodo_notify" class="form-control" value="1" <?php if ($wptodo_edit_item['0']->notify == 1) echo "checked=\"checked\""; ?> type="checkbox" />
 					</div>
-					<input name="Submit" class="btn btn-primary btn-sm" style="margin-left: 15px" value="Update" type="submit"/>
+				<!-- table starts -->
+				<table class="table table-responsive">
+					<tbody>
+						<tr style="border: 0">
+							<td style="border: 0">
+					<input name="Submit" class="btn btn-primary btn-sm" value="Update" type="submit"/>
 	      		</form>
-		</div>
+	      					</td>
+	      					<td style="border: 0">
 			<form action="" method="post">
 				<input name="wptodo_taskid" id="wptodo_taskid" value="<?php echo $id; ?>" type="hidden" />
 					<?php
-						$delete = '<input name="wptodo_deletetask" class="btn btn-danger btn-sm" style="margin-left: 80px; margin-top: -60px" value="Delete" type="submit" />';
+						$delete = '<input name="wptodo_deletetask" class="btn btn-danger btn-sm" value="Delete" type="submit" />';
 						\Inc\Pages\Admin::wptodo_delete_button($delete);
 						\Inc\Pages\Admin::wptodo_cancel();
 					?>
-				<input name="cancel" class="btn btn-success btn-sm" style="margin-left: 15px; margin-top: -60px" value="Cancel" type="submit"/>
+							</td>
+							<td style="border: 0">
+				<input name="cancel" class="btn btn-success btn-sm" value="Cancel" type="submit"/>
 			</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			<!-- table ends -->
+		</div>
 	</div>
 	<?php \Inc\Pages\Admin::wptodo_countdown_timer($wptodo_edit_item['0']->until,$wptodo_edit_item['0']->status); ?>

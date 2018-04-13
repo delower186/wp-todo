@@ -4,7 +4,7 @@ Donate link: https://www.2checkout.com/checkout/purchase?sid=103083454&quantity=
 Tags: todo, task, project management, to do list, todo list, project management, todo, todo list, task, basecamp, milestone, message, file, comment, client, team, tracking, planning, lists, reporting, project management plugin for wordpress, project manager, project manager plugin for wordpress, wordpress project management
 Requires at least: 4.0
 Tested up to: 4.9.5
-Stable tag: trunk
+Stable tag: 1.1.0
 Requires PHP: 5.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -33,6 +33,11 @@ You can show To Do List Management in the Frontend as well with placing a simple
 * Filter By any column & entry numbers (default is 10)
 * Instant search any word within the table
 * Customizable E-mail Template
+* Shortcode to use WP To Do from frontend.
+
+= Shortcodes =
+To use the plugin from frontend use the following shortcode
+* [wp-todo]
 
 = Detailed Walkthrough =
 [youtube https://www.youtube.com/watch?v=GRk25Yq6yNY&t=]
@@ -49,13 +54,13 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Frequently Asked Questions ==
 
-= Q. Does it shows up in frontend =
+= Q. Does it shows up in frontend? =
 A. Of course! Just create a new page and insert [wp-todo] shortcode to show it in frontend
 
 = Q. Who can create Task? =
 A. Only Editors and Admin's can create Tasks and Author & Contributor can edit & comment.
 
-= Q. Found a bug =
+= Q. Found a bug? =
 A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-todo/issues) on github.
 
 

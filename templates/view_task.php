@@ -32,12 +32,24 @@
 					<label>Add a Comment</label>
 					<textarea cols="40" rows="5" name="wptodo_comment_body" class="form-control" id="wptodo_comment_body" required></textarea>
 				</div>
-				<input name="wptodo_comment_submit" class="btn btn-primary btn-sm" id="wptodo_comment_submit" value="Add" type="submit">
+				<!--table starts-->
+				<table class="table table-responsive">
+					<tbody>
+						<tr style="border: 0">
+							<td style="border: 0">
+					<input name="wptodo_comment_submit" class="btn btn-primary btn-sm" id="wptodo_comment_submit" value="Add" type="submit">
 			</form>
-		</div>
+							</td>
+							<td style="border: 0">
 			<form action="" method="post">
-				<input name="cancel" class="btn btn-success btn-sm" style="margin-left: 40px; margin-top: -60px" value="Cancel" type="submit"/>
+				<input name="cancel" class="btn btn-success btn-sm" value="Cancel" type="submit"/>
 			</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			<!--table Ends-->
+		</div>
 	</div>
 <?php \Inc\Pages\Admin::wptodo_countdown_timer(self::wptodo_date($wptodo_view_item['0']->until),$wptodo_view_item['0']->status); 
 	if(isset($_POST['wptodo_comment_submit'])){
