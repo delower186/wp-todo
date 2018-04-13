@@ -4,7 +4,7 @@ Donate link: https://www.2checkout.com/checkout/purchase?sid=103083454&quantity=
 Tags: todo, task, project management, to do list, todo list, project management, todo, todo list, task, basecamp, milestone, message, file, comment, client, team, tracking, planning, lists, reporting, project management plugin for wordpress, project manager, project manager plugin for wordpress, wordpress project management
 Requires at least: 4.0
 Tested up to: 4.9.5
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 5.5
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -65,6 +65,11 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 
 
 == Changelog ==
+
+= 1.1.1 - April 14, 2018 =
+
+* Fixed Button Position on edit & view page
+
 
 = 1.1.0 - April 12, 2018 =
 
