@@ -109,7 +109,7 @@ class Admin extends BaseController
 			$now = date('Y-m-d H:i:s');
 			$deadline = $item;
 			$timefirst = strtotime($now);
-			$timesecond = strtotime("$deadline 00:00:00");
+			$timesecond = strtotime($deadline);
 			$difference = $timesecond - $timefirst;
 		?>
 			<script type="text/javascript">
