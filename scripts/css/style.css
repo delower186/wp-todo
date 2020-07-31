@@ -1,3 +1,31 @@
 /**
 * @package wptodo
 */
+.addTask{
+    margin-left: 92.5%;
+}
+.desc{
+    font-weight: bold;
+    font-size: small;
+}
+
+.title{
+    font-weight: bold;
+    font-size: large;
+    color:black;
+}
+
+.danger{
+    color:red;
+}
+
+.info{
+    color:#B7950B;
+}
+.success{
+    color:green;
+}
+
+.bold{
+    font-weight: bolder;
+}
