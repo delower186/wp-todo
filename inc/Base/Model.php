@@ -302,12 +302,12 @@ class Model extends BaseController
 				while($num != $wptodo_counted) {
 					switch ($wptodo_manage_items[$num]->status) {
 						case 4:
-								echo "<tr";
+								echo "<tr class='success'>";
 							  	echo "<td>".$wptodo_manage_items[$num]->id."</td>";
 							  	echo "<td><span style=\"float:right; display: inline;\">".self::wptodo_edit_task($wptodo_manage_items[$num]->id)."</span><a href=\"?page=wp-todo&view=".$wptodo_manage_items[$num]->id."\">".$wptodo_manage_items[$num]->title."</a></td>";
 							break;
 						case 5:
-								echo "<tr class= 'text-danger'>";
+								echo "<tr class= 'info'>";
 							  	echo "<td>".$wptodo_manage_items[$num]->id."</td>";
 							  	echo "<td><span style=\"float:right; display: inline;\">".self::wptodo_edit_task($wptodo_manage_items[$num]->id). "</span><a href=\"?page=wp-todo&view=".$wptodo_manage_items[$num]->id."\">".$wptodo_manage_items[$num]->title."</a></td>";
 							break;
