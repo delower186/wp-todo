@@ -31,6 +31,8 @@
 	?>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			jQuery('#todo').DataTable();
+			jQuery('#todo').DataTable({
+				responsive: true
+			});
 		});
 	</script>

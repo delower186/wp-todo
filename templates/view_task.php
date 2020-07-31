@@ -3,8 +3,8 @@
 <br>
 <div class="clock" id="timer"></div>
 <br>
-<h5><?php echo $wptodo_view_item['0']->title; ?></h5>
-<p class="bg-light"><?php echo $wptodo_view_item['0']->desc; ?></p>
+<h5 class="title"><?php echo $wptodo_view_item['0']->title; ?></h5>
+<p class="desc"><?php echo $wptodo_view_item['0']->desc; ?></p>
 <p>By <strong><?php echo self::wptodo_from((int) $wptodo_view_item['0']->from); ?></strong> on <em><?php echo self::wptodo_date($wptodo_view_item['0']->date); ?></em> Deadline <em><?php echo self::wptodo_date($wptodo_view_item['0']->until); ?></em>, currently assigned to <em><strong><?php echo self::wptodo_from((int) $wptodo_view_item['0']->for); ?></strong></em></p>
 <br>
 <?php
