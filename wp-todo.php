@@ -6,7 +6,7 @@
 Plugin Name: WP To Do
 Plugin URI: https://delower.me/wp-todo/
 Description: A full featured plugin for creating and managing a "to do" list.
-Version:1.2.1
+Version:1.2.2
 Author: Delower
 Author URI: https://delower.me
 License: GPLv2 or later
