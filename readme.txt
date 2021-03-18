@@ -1,11 +1,10 @@
 === WP To Do ===
 Contributors: delower186
-Donate link: https://www.2checkout.com/checkout/purchase?sid=103083454&quantity=1&product_id=1
 Tags: todo, task, project management, to do list, todo list, project management, todo, todo list, task, basecamp, milestone, message, file, comment, client, team, tracking, planning, lists, reporting, project management plugin for wordpress, project manager, project manager plugin for wordpress, wordpress project management
-Requires at least: 4.6 or higher
-Tested up to: 5.5
-Stable tag: 1.2.2
-Requires PHP: 6.7
+Requires at least: 5.4 or higher
+Tested up to: 5.7
+Stable tag: 1.2.6
+Requires PHP: 6.8
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +64,22 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 
 == Changelog ==
 
+= 1.2.6 =
+
+* Bug Fixed
+
+= 1.2.5 =
+
+* Bug Fixed
+
+= 1.2.4 =
+
+* Bug Fixed
+
+= 1.2.3 =
+
+* Bug Fixed
+
 = 1.2.2 =
 
 * Bug Fixed
@@ -105,7 +120,6 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 * Countdown Timer Added
 * Customizable E-mail template added
 * Frontend Shortcode added
-* Bootstrap 4 Layout added
 * Add Task From Bootstrap Modal
 
 = 1.0.1 =
