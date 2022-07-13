@@ -1,42 +1,4 @@
-/*
- * This combined file was created by the DataTables downloader builder:
- *   https://datatables.net/download
- *
- * To rebuild or modify this file with the latest versions of the included
- * software please visit:
- *   https://datatables.net/download/#ju/dt-1.12.1
- *
- * Included libraries:
- *   DataTables 1.12.1
- */
-
 @charset "UTF-8";
-table.dataTable td.dt-control {
-  text-align: center;
-  cursor: pointer;
-}
-table.dataTable td.dt-control:before {
-  height: 1em;
-  width: 1em;
-  margin-top: -9px;
-  display: inline-block;
-  color: white;
-  border: 0.15em solid white;
-  border-radius: 1em;
-  box-shadow: 0 0 0.2em #444;
-  box-sizing: content-box;
-  text-align: center;
-  text-indent: 0 !important;
-  font-family: "Courier New", Courier, monospace;
-  line-height: 1em;
-  content: "+";
-  background-color: #31b131;
-}
-table.dataTable tr.dt-hasChild td.dt-control:before {
-  content: "-";
-  background-color: #d33333;
-}
-
 table.dataTable td.dt-control {
   text-align: center;
   cursor: pointer;
@@ -300,6 +262,7 @@ table.dataTable tfoot th {
 table.dataTable thead th,
 table.dataTable thead td {
   padding: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 table.dataTable thead th:active,
 table.dataTable thead td:active {
@@ -308,6 +271,7 @@ table.dataTable thead td:active {
 table.dataTable tfoot th,
 table.dataTable tfoot td {
   padding: 10px 10px 6px 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
 }
 table.dataTable tbody tr {
   background-color: transparent;
@@ -612,64 +576,3 @@ table.dataTable td {
     margin-top: 0.5em;
   }
 }
-table.dataTable thead th div.DataTables_sort_wrapper {
-  position: relative;
-}
-table.dataTable thead th div.DataTables_sort_wrapper span {
-  position: absolute;
-  top: 50%;
-  margin-top: -8px;
-  right: -18px;
-}
-table.dataTable thead th.ui-state-default,
-table.dataTable tfoot th.ui-state-default {
-  border-left-width: 0;
-}
-table.dataTable thead th.ui-state-default:first-child,
-table.dataTable tfoot th.ui-state-default:first-child {
-  border-left-width: 1px;
-}
-
-/*
- * Control feature layout
- */
-.dataTables_wrapper .dataTables_paginate .fg-button {
-  box-sizing: border-box;
-  display: inline-block;
-  min-width: 1.5em;
-  padding: 0.5em;
-  margin-left: 2px;
-  text-align: center;
-  text-decoration: none !important;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-.dataTables_wrapper .dataTables_paginate .fg-button:active {
-  outline: none;
-}
-.dataTables_wrapper .dataTables_paginate .fg-button:first-child {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-}
-.dataTables_wrapper .dataTables_paginate .fg-button:last-child {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-.dataTables_wrapper .ui-widget-header {
-  font-weight: normal;
-}
-.dataTables_wrapper .ui-toolbar {
-  padding: 8px;
-}
-.dataTables_wrapper.no-footer .dataTables_scrollBody {
-  border-bottom: none;
-}
-.dataTables_wrapper .dataTables_length,
-.dataTables_wrapper .dataTables_filter,
-.dataTables_wrapper .dataTables_info,
-.dataTables_wrapper .dataTables_processing,
-.dataTables_wrapper .dataTables_paginate {
-  color: inherit;
-}
-
-

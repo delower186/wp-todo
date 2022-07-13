@@ -271,6 +271,7 @@ class Model extends BaseController
 	 * Admin CP manage page
 	 */
 	public static function wptodo_manage() {
+		
 		$wptodo_table = self::$wpdb->prefix . "wptodo";
 		if(isset($_POST['wptodo_addtask']) && isset($_POST['wptodo_title'])) self::wptodo_addtask($_POST); //If we have a new task let's add it
 		if(isset($_POST['wptodo_updatetask'])) self::wptodo_updatetask($_POST); //Update my task
@@ -281,6 +282,25 @@ class Model extends BaseController
 		else if(isset($_GET['edit'])) self::wptodo_edit($_GET['edit']);
 		else self::wptodo_manage_main();
 	}
+
+
+	public static function wptodo_shortcode(){
+		ob_start();
+		$wptodo_table = self::$wpdb->prefix . "wptodo";
+		if(isset($_POST['wptodo_addtask']) && isset($_POST['wptodo_title'])) self::wptodo_addtask($_POST); //If we have a new task let's add it
+		if(isset($_POST['wptodo_updatetask'])) self::wptodo_updatetask($_POST); //Update my task
+		if(isset($_POST['wptodo_comment_task'])) self::wptodo_addcomment($_POST); //Add comments to tasks
+		//if(isset($_POST['wptodo_filter_status']) != NULL) self::wptodo_manage_main($_POST['wptodo_filter_status']); 
+		if(isset($_POST['wptodo_deletetask'])) self::wptodo_deletetask($_POST['wptodo_taskid']); //Update my task
+		if(isset($_GET['view'])) self::wptodo_view($_GET['view']);
+		else if(isset($_GET['edit'])) self::wptodo_edit($_GET['edit']);
+		else self::wptodo_manage_main();
+
+		$ret = ob_get_contents();
+		ob_end_clean();
+		return $ret;
+	}
+
 	public static function wptodo_settings(){
 		require_once(parent::$plugin_path . 'templates/settings.php');
 	}

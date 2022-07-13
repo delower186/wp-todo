@@ -2,8 +2,8 @@
 Contributors: delower186
 Tags: todo, task, project management, to do list, todo list, project management, todo, todo list, task, basecamp, milestone, message, file, comment, client, team, tracking, planning, lists, reporting, project management plugin for wordpress, project manager, project manager plugin for wordpress, wordpress project management
 Requires at least: 5.4 or higher
-Tested up to: 5.7
-Stable tag: 1.2.6
+Tested up to: 6.0.1
+Stable tag: 1.2.7
 Requires PHP: 6.8
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -44,7 +44,7 @@ You can show To Do List Management in the Frontend as well with placing a simple
 This may have bugs and lack of many features. If you want to contribute on this project, you are more than welcome. Please fork the repository from [Github](https://github.com/delower186/wp-todo).
 
 == Donate ==
-Please [donate](https://www.2checkout.com/checkout/purchase?sid=103083454&quantity=1&product_id=1) for this awesome plugin to continue it's development to bring more awesome features.
+Please [donate]() for this awesome plugin to continue it's development to bring more awesome features.
 
 == Installation ==
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
@@ -63,6 +63,14 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 
 
 == Changelog ==
+
+= 1.2.7 =
+
+* Bug Fixed
+* Jquery-ui updated
+* Jquery datatable updated
+* Stortcode fixed
+* New Features Upcomming
 
 = 1.2.6 =
 

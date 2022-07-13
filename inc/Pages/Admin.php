@@ -19,7 +19,7 @@ class Admin extends BaseController
 	public function __construct()
 	{
 		$this->settings = new SettingsApi();
-		add_shortcode('wp-todo', array($this, 'wptodo_short_main'));
+		add_shortcode('wp-todo', array($this, 'wptodo_shortcode_main'));
 	}
 
 	public function register()
@@ -104,9 +104,9 @@ class Admin extends BaseController
 		}
 	}
 
-	public function wptodo_short_main()
+	public function wptodo_shortcode_main()
 	{
-		return Model::wptodo_manage();
+		return Model::wptodo_shortcode();
 	}
 
 	// redirect to tasks
