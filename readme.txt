@@ -2,8 +2,8 @@
 Contributors: delower186
 Tags: todo, task, project management, to do list, todo list, project management, todo, todo list, task, basecamp, milestone, message, file, comment, client, team, tracking, planning, lists, reporting, project management plugin for wordpress, project manager, project manager plugin for wordpress, wordpress project management
 Requires at least: 5.4 or higher
-Tested up to: 6.0.1
-Stable tag: 1.2.7
+Tested up to: 6.2.2
+Stable tag: 1.2.8
 Requires PHP: 6.8
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -63,6 +63,10 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 
 
 == Changelog ==
+
+= 1.2.8 =
+
+* Bug Fixed
 
 = 1.2.7 =
 
