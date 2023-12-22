@@ -340,8 +340,8 @@ class Model extends BaseController
 
 				  	echo "<td>".self::wptodo_from((int)$wptodo_manage_items[$num]->from)."</td>"; //we have to send int not strings
 				  	echo "<td>".self::wptodo_from((int)$wptodo_manage_items[$num]->for)."</td>";
-					echo "<td>".self::wptodo_date($wptodo_manage_items[$num]->date)."</td>";
-				  	echo "<td>".self::wptodo_date($wptodo_manage_items[$num]->until)."</td>";
+					echo "<td>".$wptodo_manage_items[$num]->date."</td>";
+				  	echo "<td>".$wptodo_manage_items[$num]->until."</td>";
 				  	echo "<td>".self::wptodo_status($wptodo_manage_items[$num]->status)."</td>";
 				  	echo "<td>".self::wptodo_priority($wptodo_manage_items[$num]->priority)."</td>";
 				  	echo "<td>".self::wptodo_notice($wptodo_manage_items[$num]->notify)."</td>";

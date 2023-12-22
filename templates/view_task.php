@@ -45,7 +45,7 @@ if ($wptodo_view_item_comments) {
 </table>
 <!--table Ends-->
 <?php
-\Inc\Pages\Admin::wptodo_countdown_timer(self::wptodo_date($wptodo_view_item['0']->until), $wptodo_view_item['0']->status);
+\Inc\Pages\Admin::wptodo_countdown_timer($wptodo_view_item['0']->until, $wptodo_view_item['0']->status)
 if (isset($_POST['wptodo_comment_submit'])) {
 	\Inc\Base\Model::wptodo_email($wptodo_view_item['0']->from, $wptodo_view_item['0']->for);
 }

@@ -46,9 +46,9 @@
 				<td><label for="wptodo_notify">Send alerts</label></td>
 				<td><input name="wptodo_notify" id="wptodo_notify" value="1" type="checkbox" /></td>
 			</tr>
-			<!-- <tr>
+			<tr>
 				<td><button name="submit" type="submit" value="Add Task">Submit</button></td>
-			</tr> -->
+			</tr> 
 		</table>
 	</form>
 </div>
