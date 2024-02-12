@@ -4,11 +4,11 @@
 */
 /*
 Plugin Name: WP To Do
-Plugin URI: https://delower.me/wp-todo/
+Plugin URI: https://sandalia.com.bd/apps
 Description: A full featured plugin for creating and managing a "to do" list.
-Version:1.2.8
+Version:1.3.0
 Author: Delower
-Author URI: https://delower.me
+Author URI: https://sandalia.com.bd/apps
 License: GPLv2 or later
 Text Domain: wptodo
 */

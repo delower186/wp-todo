@@ -191,7 +191,7 @@ class Model extends BaseController
 	public static function wptodo_addtask(array $newdata) {
 		$wptodo_table = self::$wpdb->prefix . "wptodo";
 		$today_date = gmdate('Y-m-d');
-		$wptodo_query = "INSERT INTO `".$wptodo_table."` (`id`, `date`, `title`, `desc`, `from`, `for`, `until`,`status`,`priority`,`notify`)VALUES (NULL , '$today_date', '".$newdata['wptodo_title']."','".$newdata['wptodo_description']."','".$newdata['wptodo_from']."','".$newdata['wptodo_for']."','".$newdata['wptodo_deadline']."','".$newdata['wptodo_status']."','".$newdata['wptodo_priority']."','".!empty($newdata['wptodo_notify'])."')";
+		$wptodo_query = "INSERT INTO `".$wptodo_table."` (`id`, `date`, `title`, `desc`, `from`, `for`, `until`,`status`,`priority`,`notify`)VALUES (NULL , '$today_date', '".htmlentities(strip_tags($newdata['wptodo_title']))."','".htmlentities($newdata['wptodo_description'])."','".$newdata['wptodo_from']."','".$newdata['wptodo_for']."','".$newdata['wptodo_deadline']."','".$newdata['wptodo_status']."','".$newdata['wptodo_priority']."','".!empty($newdata['wptodo_notify'])."')";
 		self::$wpdb->query($wptodo_query);
 		self::wptodo_email();
 	}
@@ -201,7 +201,7 @@ class Model extends BaseController
 	 */
 	public static function wptodo_updatetask(array $newdata) {
 		$wptodo_table = self::$wpdb->prefix . "wptodo";
-		$wptodo_query = "UPDATE `".$wptodo_table."` SET `title`='".$newdata['wptodo_title']."', `desc`='".$newdata['wptodo_description']."', `for`='".$newdata['wptodo_for']."', `until`='".$newdata['wptodo_deadline']."', `status`='".$newdata['wptodo_status']."', `priority`='".$newdata['wptodo_priority']."', `notify`='".!empty($newdata['wptodo_notify'])."' WHERE `id`='".$newdata['wptodo_taskid']."'";
+		$wptodo_query = "UPDATE `".$wptodo_table."` SET `title`='".htmlentities(strip_tags($newdata['wptodo_title']))."', `desc`='".htmlentities($newdata['wptodo_description'])."', `for`='".$newdata['wptodo_for']."', `until`='".$newdata['wptodo_deadline']."', `status`='".$newdata['wptodo_status']."', `priority`='".$newdata['wptodo_priority']."', `notify`='".!empty($newdata['wptodo_notify'])."' WHERE `id`='".$newdata['wptodo_taskid']."'";
 		self::$wpdb->query($wptodo_query);
 		self::wptodo_email();
 
@@ -349,5 +349,7 @@ class Model extends BaseController
 				  	echo "";
 				  	$num++;
 				}
-	}	
+	}
+	
+	
 }
