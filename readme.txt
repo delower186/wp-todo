@@ -4,7 +4,7 @@ Tags: todo, task, project management, to do list, todo list, project management,
 Requires at least: 6.4 or higher
 Tested up to: 6.8.2
 Stable tag: 2.0.0
-Requires PHP: 7.2 or higher
+Requires PHP: 7.2.24
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,9 @@ A powerful, full-featured WordPress plugin to effortlessly create, manage, and t
 
 == Description ==
 
-This full-featured WordPress plugin provides a comprehensive solution for creating, managing, and tracking to-do lists directly from your dashboard. Designed for both personal and professional use, it allows users to organize tasks efficiently, set priorities, and monitor progress at a glance. Each task can be assigned a status such as Not Started, In Progress, On Hold, Review, Completed, or Cancelled, giving you full visibility into your workflow. You can also set deadlines to ensure timely completion and prioritize tasks as High, Medium, or Low, helping you focus on what matters most. The plugin’s intuitive interface makes adding, editing, and deleting tasks quick and easy, while color-coded statuses and priorities provide a clear visual overview of your work. Perfect for individuals, teams, or small businesses, it enhances productivity by keeping tasks organized, improving accountability, and simplifying task tracking. Whether you’re managing daily chores, project tasks, or complex workflows, this plugin is flexible and user-friendly, making it easy to stay on top of your responsibilities. With its seamless integration into the WordPress dashboard, you can manage your to-do lists without leaving your site, ensuring efficiency and organization in one convenient tool.
+This full-featured WordPress plugin provides a comprehensive solution for creating, managing, and tracking to-do lists directly from your dashboard. 
+
+Designed for both personal and professional use, it allows users to organize tasks efficiently, set priorities, and monitor progress at a glance. Each task can be assigned a status such as Not Started, In Progress, On Hold, Review, Completed, or Cancelled, giving you full visibility into your workflow. You can also set deadlines to ensure timely completion and prioritize tasks as High, Medium, or Low, helping you focus on what matters most. The plugin’s intuitive interface makes adding, editing, and deleting tasks quick and easy, while color-coded statuses and priorities provide a clear visual overview of your work. Perfect for individuals, teams, or small businesses, it enhances productivity by keeping tasks organized, improving accountability, and simplifying task tracking. Whether you’re managing daily chores, project tasks, or complex workflows, this plugin is flexible and user-friendly, making it easy to stay on top of your responsibilities. With its seamless integration into the WordPress dashboard, you can manage your to-do lists without leaving your site, ensuring efficiency and organization in one convenient tool.
 
 == Features ==
 * **Brand new design & re-developed from scratch - More Features comming soon!**
