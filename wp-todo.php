@@ -6,7 +6,7 @@
 Plugin Name: WP To Do
 Plugin URI: https://sandalia.com.bd/apps
 Description: A powerful, full-featured WordPress plugin to effortlessly create, manage, and track your tasks with custom statuses, priorities, and deadlines right from your dashboard.
-Version:2.0.0
+Version:2.0.1
 Author: Delower
 Author URI: https://sandalia.com.bd/apps
 License: GPLv2 or later
@@ -27,7 +27,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-Copyright (C) 2018  delower.
+Copyright (C) 2025  delower.
 
 */
 defined('ABSPATH') or die('Hey, What are you doing here? You Silly Man!');
