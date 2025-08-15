@@ -1,41 +1,26 @@
 === WP To Do ===
 Contributors: delower186
 Tags: todo, task, project management, to do list, todo list, project management, todo, todo list, task, basecamp, milestone, message, file, comment, client, team, tracking, planning, lists, reporting, project management plugin for wordpress, project manager, project manager plugin for wordpress, wordpress project management
-Requires at least: 5.4 or higher
-Tested up to: 6.4.3
-Stable tag: 1.3.0
-Requires PHP: 6.8
+Requires at least: 6.4 or higher
+Tested up to: 6.8.2
+Stable tag: 2.0.0
+Requires PHP: 7.2 or higher
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A full featured plugin for creating and managing a To Do list.
+A powerful, full-featured WordPress plugin to effortlessly create, manage, and track your tasks with custom statuses, priorities, and deadlines right from your dashboard.
 
 == Description ==
 
-Best To Do List Management Tool for Wordpress
-
-WP To Do is a great To Do List Management Plugin. You can Manage all of your To Do List simply with this complete & right tool with all the options you need! It gives you Premium To Do List Management Features for free!
-
-You will be able to Add Task to the List and assign those to registered users. The Tasks can be edited, deadlined, managed by statuses and importance. The Assignees can be notified automatically or by need, sending a comment or a reminder.
-
-You can show To Do List Management in the Frontend as well with placing a simple shortcode [wp-todo], no hassle to allow other users' to enter your Private Administration Area!
+This full-featured WordPress plugin provides a comprehensive solution for creating, managing, and tracking to-do lists directly from your dashboard. Designed for both personal and professional use, it allows users to organize tasks efficiently, set priorities, and monitor progress at a glance. Each task can be assigned a status such as Not Started, In Progress, On Hold, Review, Completed, or Cancelled, giving you full visibility into your workflow. You can also set deadlines to ensure timely completion and prioritize tasks as High, Medium, or Low, helping you focus on what matters most. The plugin’s intuitive interface makes adding, editing, and deleting tasks quick and easy, while color-coded statuses and priorities provide a clear visual overview of your work. Perfect for individuals, teams, or small businesses, it enhances productivity by keeping tasks organized, improving accountability, and simplifying task tracking. Whether you’re managing daily chores, project tasks, or complex workflows, this plugin is flexible and user-friendly, making it easy to stay on top of your responsibilities. With its seamless integration into the WordPress dashboard, you can manage your to-do lists without leaving your site, ensuring efficiency and organization in one convenient tool.
 
 == Features ==
+* **Brand new design & re-developed from scratch - More Features comming soon!**
 * Add as many Task to the list as you want with title, description, deadline, status, Priority etc
 * Add tasks, assign users, assign due date
 * Countdown Timer shows how many days, hours, minutes & seconds left
-* Add comments on individual to-do lists
-* Mark Task as Solved, Closed, Open, New etc
+* Mark Task as Not Started, In Progress, Pending, In Review & more
 * Beautiful "to do" list management dashboard
-* Ajax data table
-* Instant Multiple filter, search & pagination
-* Filter By any column & entry numbers (default is 10)
-* Instant search any word within the table
-* Customizable E-mail Template
-* Shortcode to use WP To Do from frontend.
-
-== Shortcodes ==
-* [wp-todo]
 
 == Detailed Walkthrough ==
 [youtube https://www.youtube.com/watch?v=GRk25Yq6yNY&t=]
@@ -52,17 +37,18 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Frequently Asked Questions ==
 
-= Q. Does it shows up in frontend? =
-A. Of course! Just create a new page and insert [wp-todo] shortcode to show it in frontend
-
-= Q. Who can create Task? =
-A. Only Editors and Admin's can create Tasks and Author & Contributor can edit & comment.
-
 = Q. Found a bug? =
 A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-todo/issues) on github.
 
 
 == Changelog ==
+
+= 2.0.0 =
+* Re-developed from scratch
+* Brand new UI
+
+
+= 1.3.0=
 
 = 1.2.9 =
 
@@ -148,10 +134,5 @@ Upgrade for better performance & Awesome new features
 
 == Screenshots ==
 1. WP To Do List Dashboard. You can see all your Tasks from here and Create New Task
-2. Task Details Page and Comment Form
-3. Task Edit Page with OverDue Status
-4. Task Edit Page with Countdown Timer
-5. Add New Task Pop up window 1st Part
-6. Add New Task Pop up window 2nd Part
-7. Settings Page With Customizable E-mail Form
-8. Frontend Dashboard Page
+2. Task Details Page
+3. Add New Task Editor

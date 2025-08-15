@@ -3,9 +3,9 @@
 * @package wptodo
 */
 /*
-Plugin Name: WP To Do 2
+Plugin Name: WP To Do
 Plugin URI: https://sandalia.com.bd/apps
-Description: A full featured plugin for creating and managing a "to do" list.
+Description: A powerful, full-featured WordPress plugin to effortlessly create, manage, and track your tasks with custom statuses, priorities, and deadlines right from your dashboard.
 Version:2.0.0
 Author: Delower
 Author URI: https://sandalia.com.bd/apps
