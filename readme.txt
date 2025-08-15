@@ -45,7 +45,7 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 
 == Changelog ==
 
-= 2.0.0 =
+= 2.0.1 =
 * Re-developed from scratch
 * Brand new UI
 
