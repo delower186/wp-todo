@@ -97,14 +97,15 @@ function wptodo_meta_box_callback($post) {
             // $todo_status = get_post_meta( $post_id, 'todo_status', true );
 
             // Default value if no status is set
-            $todo_status = !empty($todo_status) ? $todo_status : 'New';
+            $todo_status = !empty($todo_status) ? $todo_status : 'Not Started';
         ?>
         <select name="todo_status" id="todo_status" style="width:100%;">
-            <option value="New"    <?php selected( $todo_status, 'New' ); ?>>New</option>
-            <option value="Open"   <?php selected( $todo_status, 'Open' ); ?>>Open</option>
-            <option value="Buggy"  <?php selected( $todo_status, 'Buggy' ); ?>>Buggy</option>
-            <option value="Solved" <?php selected( $todo_status, 'Solved' ); ?>>Solved</option>
-            <option value="Closed" <?php selected( $todo_status, 'Closed' ); ?>>Closed</option>
+            <option value="Not Started"    <?php selected( $todo_status, 'Not Started' ); ?>>Not Started</option>
+            <option value="In Progress"   <?php selected( $todo_status, 'In Progress' ); ?>>In Progress</option>
+            <option value="Pending"  <?php selected( $todo_status, 'Pending' ); ?>>Pending</option>
+            <option value="In Review" <?php selected( $todo_status, 'In Review' ); ?>>In Review</option>
+            <option value="Completed" <?php selected( $todo_status, 'Completed' ); ?>>Completed</option>
+            <option value="Cancelled" <?php selected( $todo_status, 'Cancelled' ); ?>>Cancelled</option>
         </select>
     </p>
     <p>
@@ -120,7 +121,7 @@ function wptodo_meta_box_callback($post) {
             <option value="Low"       <?php selected( $todo_priority, 'Low' ); ?>>Low</option>
             <option value="Normal"    <?php selected( $todo_priority, 'Normal' ); ?>>Normal</option>
             <option value="High"      <?php selected( $todo_priority, 'High' ); ?>>High</option>
-            <option value="Important" <?php selected( $todo_priority, 'Important' ); ?>>Important</option>
+            <option value="Important"      <?php selected( $todo_priority, 'Important' ); ?>>Important</option>
         </select>
     </p>
     <?php
