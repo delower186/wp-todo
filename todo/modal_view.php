@@ -9,7 +9,7 @@ add_action( 'wp_ajax_wptodo_quick_view', function() {
     $assignee_id = get_post_meta( $post_id, '_todo_assignee', true );
     $assignee_name = $assignee_id ? get_the_author_meta('display_name', $assignee_id) : '—';
     $priority = get_post_meta( $post_id, '_todo_priority', true ) ?: 'Normal';
-    $status = get_post_meta( $post_id, '_todo_status', true ) ?: 'New';
+    $status = get_post_meta( $post_id, '_todo_status', true ) ?: 'Not Started';
     $deadline = get_post_meta( $post_id, '_todo_deadline', true ) ?: '—';
 
     $content = apply_filters('the_content', $post->post_content);
@@ -27,6 +27,13 @@ add_action( 'wp_ajax_wptodo_quick_view', function() {
         $time_left = 'Deadline passed';
     } else {
         $time_left = $interval->days . 'd ' . $interval->h . 'h ' . $interval->i . 'm left';
+    }
+
+    // status on modal
+    if ($status == 'Completed') {
+        $time_left = "🎉";
+    }elseif ($status == "Cancelled") {
+        $time_left = "😢";
     }
 
     ob_start(); ?>
