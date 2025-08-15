@@ -1,6 +1,6 @@
 === WP To Do ===
 Contributors: delower186
-Tags: todo, task, project management, to do list, todo list, project management, todo, todo list, task, basecamp, milestone, message, file, comment, client, team, tracking, planning, lists, reporting, project management plugin for wordpress, project manager, project manager plugin for wordpress, wordpress project management
+Tags: to-do list, task management, project management, WordPress project manager, productivity
 Requires at least: 6.4 or higher
 Tested up to: 6.8.2
 Stable tag: 2.0.0
