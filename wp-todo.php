@@ -6,11 +6,11 @@
 Plugin Name: WP To Do
 Plugin URI: https://sandalia.com.bd/apps
 Description: WP-Todo: A full-featured WordPress plugin to create, manage, and track tasks with custom statuses, priorities, and deadlines from your dashboard.
-Version:2.0.1
+Version:2.0.2
 Author: Delower
 Author URI: https://sandalia.com.bd/apps
 License: GPLv2 or later
-Text Domain: wptodo
+Text Domain: wp-todo
 */
 /*
 This program is free software; you can redistribute it and/or

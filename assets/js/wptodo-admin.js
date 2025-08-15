@@ -17,7 +17,7 @@ jQuery(document).ready(function($){
         $modal.html('');
 
         // Fetch new content via AJAX
-        $.post(wptodo_ajax.ajax_url, { action: 'wptodo_quick_view', post_id: post_id }, function(response){
+        $.post(wptodo_ajax.ajax_url, { action: 'wp-todo_quick_view', post_id: post_id, 'wp-todo_nonce': wptodo_ajax.nonce }, function(response){
             if(response.success){
                 $modal.html(response.data);
 

@@ -1,6 +1,6 @@
 <?php 
 add_filter( 'manage_wptodo_posts_columns', function( $columns ) {
-    $columns['todo_deadline_countdown'] = __( 'Time Left', 'wptodo' );
+    $columns['todo_deadline_countdown'] = __( 'Time Left', 'wp-todo' );
     return $columns;
 } );
 
@@ -17,7 +17,7 @@ add_action( 'manage_wptodo_posts_custom_column', function( $column, $post_id ) {
 }, 10, 2 );
 
 add_action( 'admin_enqueue_scripts', function( $hook ) {
-    if ( 'edit.php' !== $hook || get_post_type() !== 'wptodo' ) return;
+    if ( 'edit.php' !== $hook || get_post_type() !== 'wp-todo' ) return;
 
     wp_add_inline_style( 'wp-admin', "
         .wptodo-countdown {

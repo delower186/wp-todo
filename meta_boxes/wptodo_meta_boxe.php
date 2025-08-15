@@ -10,7 +10,7 @@ function wptodo_add_meta_box() {
         'todo_deadline',                         // ID
         'Info',               // Title
         'wptodo_meta_box_callback',     // Callback function
-        'wptodo',                       // Post type
+        'wp-todo',                       // Post type
         'normal',                          // Context
         'default'                          // Priority
     );
@@ -19,7 +19,7 @@ function wptodo_add_meta_box() {
         'todo_assignee',                         // ID
         '',                             // Title
         'wptodo_meta_box_callback',     // Callback function
-        'wptodo',                       // Post type
+        'wp-todo',                       // Post type
         'normal',                          // Context
         'default'                          // Priority
     );
@@ -28,7 +28,7 @@ function wptodo_add_meta_box() {
         'todo_status',                         // ID
         '',                             // Title
         'wptodo_meta_box_callback',     // Callback function
-        'wptodo',                       // Post type
+        'wp-todo',                       // Post type
         'normal',                          // Context
         'default'                          // Priority
     );
@@ -37,7 +37,7 @@ function wptodo_add_meta_box() {
         'todo_priority',                         // ID
         '',                             // Title
         'wptodo_meta_box_callback',     // Callback function
-        'wptodo',                       // Post type
+        'wp-todo',                       // Post type
         'normal',                          // Context
         'default'                          // Priority
     );
@@ -64,7 +64,7 @@ function wptodo_meta_box_callback($post) {
             // $todo_deadline = get_post_meta( $post_id, 'todo_deadline', true );
 
             // Default to today's date if empty
-            $todo_deadline = !empty($todo_deadline) ? $todo_deadline : date('Y-m-d');
+            $todo_deadline = !empty($todo_deadline) ? $todo_deadline : gmdate('Y-m-d');
         ?>
         <input type="date" name="todo_deadline" id="todo_deadline" value="<?php echo esc_attr($todo_deadline); ?>" style="width:100%;">
     </p>
@@ -130,7 +130,7 @@ function wptodo_meta_box_callback($post) {
 function wptodo_save_meta_box($post_id) {
     // Verify nonce
     if (!isset($_POST['wptodo_add_meta_box_nonce_field']) ||
-        !wp_verify_nonce($_POST['wptodo_add_meta_box_nonce_field'], 'wptodo_add_meta_box_nonce')) {
+        !wp_verify_nonce(sanitize_text_field(wp_unslash( $_POST['wptodo_add_meta_box_nonce_field'] )), 'wptodo_add_meta_box_nonce')) {
         return;
     }
 
@@ -142,16 +142,16 @@ function wptodo_save_meta_box($post_id) {
 
     // Save field
     if (isset($_POST['todo_deadline'])) {
-        update_post_meta($post_id, '_todo_deadline', sanitize_text_field($_POST['todo_deadline']));
+        update_post_meta($post_id, '_todo_deadline', sanitize_text_field(wp_unslash($_POST['todo_deadline'])));
     }
     if (isset($_POST['todo_assignee'])) {
-        update_post_meta($post_id, '_todo_assignee', sanitize_text_field($_POST['todo_assignee']));
+        update_post_meta($post_id, '_todo_assignee', sanitize_text_field(wp_unslash($_POST['todo_assignee'])));
     }
     if (isset($_POST['todo_status'])) {
-        update_post_meta($post_id, '_todo_status', sanitize_text_field($_POST['todo_status']));
+        update_post_meta($post_id, '_todo_status', sanitize_text_field(wp_unslash($_POST['todo_status'])));
     }
     if (isset($_POST['todo_priority'])) {
-        update_post_meta($post_id, '_todo_priority', sanitize_text_field($_POST['todo_priority']));
+        update_post_meta($post_id, '_todo_priority', sanitize_text_field(wp_unslash($_POST['todo_priority'])));
     }
 }
 add_action('save_post', 'wptodo_save_meta_box');

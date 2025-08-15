@@ -2,8 +2,8 @@
 Contributors: delower186
 Tags: to-do list, task management, project management, WordPress project manager, productivity
 Requires at least: 6.4 or higher
-Tested up to: 6.8.2
-Stable tag: 2.0.1
+Tested up to: 6.8
+Stable tag: 2.0.2
 Requires PHP: 7.2.24
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

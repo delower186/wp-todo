@@ -1,19 +1,19 @@
 <?php 
 // 1️⃣ Add new columns to the CPT list table
-add_filter( 'manage_wptodo_posts_columns', function( $columns ) {
+add_filter( 'manage_wp-todo_posts_columns', function( $columns ) {
     // Optional: remove default Date column
     // unset($columns['date']);
-    $columns['todo_assigned_by']   = __( 'Assigned By', 'wptodo' );
-    $columns['todo_deadline'] = __( 'Deadline', 'wptodo' );
-    $columns['todo_assignee']   = __( 'Assigned To', 'wptodo' );
-    $columns['todo_priority'] = __( 'Priority', 'wptodo' );
-    $columns['todo_status']   = __( 'Status', 'wptodo' );
+    $columns['todo_assigned_by']   = __( 'Assigned By', 'wp-todo' );
+    $columns['todo_deadline'] = __( 'Deadline', 'wp-todo' );
+    $columns['todo_assignee']   = __( 'Assigned To', 'wp-todo' );
+    $columns['todo_priority'] = __( 'Priority', 'wp-todo' );
+    $columns['todo_status']   = __( 'Status', 'wp-todo' );
 
     return $columns;
 } );
 
 // 2️⃣ Fill the custom columns with colored data
-add_action( 'manage_wptodo_posts_custom_column', function( $column, $post_id  ) {
+add_action( 'manage_wp-todo_posts_custom_column', function( $column, $post_id  ) {
     switch ( $column ) {
 
         case 'todo_assigned_by':
@@ -63,7 +63,7 @@ add_action( 'manage_wptodo_posts_custom_column', function( $column, $post_id  ) 
 }, 10, 2 );
 
 // 3️⃣ Make columns sortable
-add_filter( 'manage_edit-wptodo_sortable_columns', function( $columns ) {
+add_filter( 'manage_edit-wp-todo_sortable_columns', function( $columns ) {
     $columns['todo_deadline'] = 'todo_deadline';
     $columns['todo_assignee'] = 'todo_assignee';
     $columns['todo_priority'] = 'todo_priority';

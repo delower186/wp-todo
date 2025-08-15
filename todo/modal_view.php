@@ -1,10 +1,21 @@
 <?php 
-add_action( 'wp_ajax_wptodo_quick_view', function() {
-    $post_id = intval( $_POST['post_id'] ?? 0 );
+add_action( 'wp_ajax_wp-todo_quick_view', function() {
+    // First, safely get and unslash the nonce
+    $nonce = isset( $_POST['wp-todo_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['wp-todo_nonce'] ) ) : '';
+
+    // Verify the nonce
+    if ( ! wp_verify_nonce( $nonce, 'wp-todo_action' ) ) {
+        wp_send_json_error( array( 'message' => 'Security check failed' ), 400 );
+        exit;
+    }
+
+    // Now process the post ID
+    $post_id = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : 0;
+
     if ( ! $post_id ) wp_send_json_error('Invalid post ID');
 
     $post = get_post( $post_id );
-    if ( ! $post || $post->post_type !== 'wptodo' ) wp_send_json_error('Post not found');
+    if ( ! $post || $post->post_type !== 'wp-todo' ) wp_send_json_error('Post not found');
 
     $assignee_id = get_post_meta( $post_id, '_todo_assignee', true );
     $assignee_name = $assignee_id ? get_the_author_meta('display_name', $assignee_id) : '—';
@@ -15,7 +26,7 @@ add_action( 'wp_ajax_wptodo_quick_view', function() {
     $content = apply_filters('the_content', $post->post_content);
 
     if (!$deadline) {
-        $deadline = date('Y-m-d');
+        $deadline = gmdate('Y-m-d');
     }
 
     $now = new DateTime();
@@ -61,7 +72,7 @@ add_action( 'wp_ajax_wptodo_quick_view', function() {
 
 add_action( 'admin_footer-edit.php', function() {
     $screen = get_current_screen();
-    if ( $screen->post_type !== 'wptodo' ) return;
+    if ( $screen->post_type !== 'wp-todo' ) return;
     ?>
     <script>
     jQuery(document).ready(function($){
@@ -84,8 +95,9 @@ add_action( 'admin_footer-edit.php', function() {
 
             // AJAX to fetch modal content
             $.post(wptodo_ajax.ajax_url, {
-                action: 'wptodo_quick_view',
-                post_id: post_id
+                action: 'wp-todo_quick_view',
+                post_id: post_id,
+                'wp-todo_nonce': wptodo_ajax.nonce
             }, function(response){
                 if(response.success){
                     $('<div class="wptodo-modal"></div>').html(response.data).dialog({
