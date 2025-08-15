@@ -9,13 +9,13 @@ add_action( 'save_post_wptodo', function( $post_id, $post, $update ) {
 
     // Get task data
     $title    = get_the_title( $post_id );
-    $priority = get_post_meta( $post_id, 'todo_priority', true ) ?: 'Normal';
-    $status   = get_post_meta( $post_id, 'todo_status', true ) ?: 'New';
-    $deadline = get_post_meta( $post_id, 'todo_deadline', true ) ?: date( 'Y-m-d' );
+    $priority = get_post_meta( $post_id, '_todo_priority', true ) ?: 'Normal';
+    $status   = get_post_meta( $post_id, '_todo_status', true ) ?: 'Not Started';
+    $deadline = get_post_meta( $post_id, '_todo_deadline', true ) ?: date( 'Y-m-d' );
     $link     = get_permalink( $post_id );
 
     // Get recipients
-    $assignee_id = get_post_meta( $post_id, 'todo_assignee', true );
+    $assignee_id = get_post_meta( $post_id, '_todo_assignee', true );
     $assignee    = $assignee_id ? get_userdata( $assignee_id ) : null;
     $author      = get_userdata( $post->post_author );
 
