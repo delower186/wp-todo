@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Task Notification</title>
+  <style>
+    body { font-family: Arial, sans-serif; color: #333; }
+    .container { background: #f9f9f9; padding: 20px; border-radius: 8px; }
+    .title { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+    .details { margin-bottom: 15px; }
+    .footer { font-size: 12px; color: #777; }
+    a { color: #0073aa; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>{{INTRO}}</p>
+    <div class="details">
+      <p><strong>Title:</strong> {{TITLE}}</p>
+      <p><strong>Priority:</strong> {{PRIORITY}}</p>
+      <p><strong>Status:</strong> {{STATUS}}</p>
+      <p><strong>Deadline:</strong> {{DEADLINE}}</p>
+    </div>
+    <p><a href="{{LINK}}">View Task</a></p>
+    <div class="footer">
+      <p>This is an automated message from WPToDo.</p>
+    </div>
+  </div>
+</body>
+</html>

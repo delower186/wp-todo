@@ -3,10 +3,10 @@
 * @package wptodo
 */
 /*
-Plugin Name: WP To Do
+Plugin Name: WP To Do 2
 Plugin URI: https://sandalia.com.bd/apps
 Description: A full featured plugin for creating and managing a "to do" list.
-Version:1.3.0
+Version:2.0.0
 Author: Delower
 Author URI: https://sandalia.com.bd/apps
 License: GPLv2 or later
@@ -32,21 +32,14 @@ Copyright (C) 2018  delower.
 */
 defined('ABSPATH') or die('Hey, What are you doing here? You Silly Man!');
 
-if(file_exists(dirname(__FILE__).'/vendor/autoload.php')){
-	require_once dirname(__FILE__).'/vendor/autoload.php';
-}
+define('PLUGIN_DIR_PATH', plugin_dir_path( __FILE__));
+define('PLUGIN_DIR_URL', plugin_dir_url( __FILE__));
 
-//activate plugin
-function activate_wptodo(){
-	\Inc\Base\Activate::activate();
-}
-register_activation_hook( __FILE__, 'activate_wptodo' );
-//deactivate plugin
-function deactivate_wptodo(){
-	\Inc\Base\Deactivate::deactivate();
-}
-register_deactivation_hook( __FILE__, 'deactivate_wptodo' );
-//instantiate classes
-if( class_exists( 'Inc\\Init' ) ){
-	\Inc\Init::register_services();
-}
+
+include PLUGIN_DIR_PATH . "todo/wptodo_custom_post_type.php";
+include PLUGIN_DIR_PATH . "meta_boxes/wptodo_meta_boxe.php";
+include PLUGIN_DIR_PATH . "list_table/custom_columns.php";
+include PLUGIN_DIR_PATH . "notification/notify.php";
+include PLUGIN_DIR_PATH . "inc/enqueue.php";
+include PLUGIN_DIR_PATH . "todo/modal_view.php";
+include PLUGIN_DIR_PATH . "todo/count_down_timer.php";
