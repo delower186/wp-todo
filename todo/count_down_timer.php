@@ -1,10 +1,10 @@
 <?php 
-add_filter( 'manage_wptodo_posts_columns', function( $columns ) {
+add_filter( 'manage_wp-todo_posts_columns', function( $columns ) {
     $columns['todo_deadline_countdown'] = __( 'Time Left', 'wp-todo' );
     return $columns;
 } );
 
-add_action( 'manage_wptodo_posts_custom_column', function( $column, $post_id ) {
+add_action( 'manage_wp-todo_posts_custom_column', function( $column, $post_id ) {
     if ( $column === 'todo_deadline_countdown' ) {
         $deadline = get_post_meta( $post_id, '_todo_deadline', true );
         $status   = get_post_meta( $post_id, '_todo_status', true );

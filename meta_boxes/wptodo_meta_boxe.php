@@ -4,133 +4,59 @@
  *
  */
 function wptodo_add_meta_box() {
-
-
-    add_meta_box(
-        'todo_deadline',                         // ID
-        'Info',               // Title
-        'wptodo_meta_box_callback',     // Callback function
-        'wp-todo',                       // Post type
-        'normal',                          // Context
-        'default'                          // Priority
-    );
-
-    add_meta_box(
-        'todo_assignee',                         // ID
-        '',                             // Title
-        'wptodo_meta_box_callback',     // Callback function
-        'wp-todo',                       // Post type
-        'normal',                          // Context
-        'default'                          // Priority
-    );
-
-    add_meta_box(
-        'todo_status',                         // ID
-        '',                             // Title
-        'wptodo_meta_box_callback',     // Callback function
-        'wp-todo',                       // Post type
-        'normal',                          // Context
-        'default'                          // Priority
-    );
-
-    add_meta_box(
-        'todo_priority',                         // ID
-        '',                             // Title
-        'wptodo_meta_box_callback',     // Callback function
-        'wp-todo',                       // Post type
-        'normal',                          // Context
-        'default'                          // Priority
-    );
-
+    add_meta_box('todo_deadline', 'Deadline', 'wptodo_meta_box_callback', 'wp-todo', 'normal', 'default');
+    add_meta_box('todo_assignee', 'Assignee', 'wptodo_meta_box_callback', 'wp-todo', 'normal', 'default');
+    add_meta_box('todo_status', 'Status', 'wptodo_meta_box_callback', 'wp-todo', 'normal', 'default');
+    add_meta_box('todo_priority', 'Priority', 'wptodo_meta_box_callback', 'wp-todo', 'normal', 'default');
 }
 add_action('add_meta_boxes', 'wptodo_add_meta_box');
 
-function wptodo_meta_box_callback($post) {
-    // Add nonce for security
-    wp_nonce_field('wptodo_add_meta_box_nonce', 'wptodo_add_meta_box_nonce_field');
+function wptodo_meta_box_callback($post, $meta) {
+    wp_nonce_field('wp-todo_add_meta_box_nonce', 'wp-todo_add_meta_box_nonce_field');
 
-    // Retrieve existing value
-    $todo_deadline = get_post_meta($post->ID, '_todo_deadline', true);
-    $todo_assignee = get_post_meta($post->ID, '_todo_assignee', true);
-    $todo_status = get_post_meta($post->ID, '_todo_status', true);
-    $todo_priority = get_post_meta($post->ID, '_todo_priority', true);
+    switch ($meta['id']) {
+        case 'todo_deadline':
+            $value = get_post_meta($post->ID, '_todo_deadline', true) ?: gmdate('Y-m-d');
+            echo '<input type="date" name="todo_deadline" value="'.esc_attr($value).'" style="width:100%;">';
+            break;
 
-
-    ?>
-    <p>
-        <label for="deadline">Deadline:</label><br>
-        <?php
-            // Example: load deadline from DB
-            // $todo_deadline = get_post_meta( $post_id, 'todo_deadline', true );
-
-            // Default to today's date if empty
-            $todo_deadline = !empty($todo_deadline) ? $todo_deadline : gmdate('Y-m-d');
-        ?>
-        <input type="date" name="todo_deadline" id="todo_deadline" value="<?php echo esc_attr($todo_deadline); ?>" style="width:100%;">
-    </p>
-    <p>
-        <label for="assignee">Assignee:</label><br>
-        <?php
-            // Get all users
+        case 'todo_assignee':
             $users = get_users();
+            $selected = get_post_meta($post->ID, '_todo_assignee', true) ?: get_current_user_id();
+            echo '<select name="todo_assignee" style="width:100%">';
+            foreach ($users as $user) {
+                echo '<option value="' . esc_attr( $user->ID ) . '" ' . selected( $selected, $user->ID, false ) . '>' . esc_html( $user->display_name ) . '</option>';
+            }
+            echo '</select>';
+            break;
 
-            // Get current logged-in user
-            $current_user = wp_get_current_user();
+        case 'todo_status':
+            $status = get_post_meta($post->ID, '_todo_status', true) ?: 'Not Started';
+            $options = ['Not Started','In Progress','Pending','In Review','Completed','Cancelled'];
+            echo '<select name="todo_status" style="width:100%">';
+            foreach ($options as $opt) {
+                echo '<option value="' . esc_attr( $opt ) . '" ' . selected( $status, $opt, false ) . '>' . esc_html( $opt ) . '</option>';
+            }
+            echo '</select>';
+            break;
 
-            // Decide which user should be pre-selected
-            $selected_user_id = !empty($todo_assignee) ? $todo_assignee : $current_user->ID;
-        ?>
-        <select name="todo_assignee" id="todo_assignee" style="width:100%;">
-            <?php foreach ( $users as $user ) : ?>
-                <option value="<?php echo esc_attr( $user->ID ); ?>" 
-                    <?php selected( $selected_user_id, $user->ID ); ?>>
-                    <?php echo esc_html( $user->display_name ); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-
-    </p>
-    <p>
-        <label for="status">Status:</label><br>
-        <?php
-            // Example: load status from DB (post meta, options, etc.)
-            // $todo_status = get_post_meta( $post_id, 'todo_status', true );
-
-            // Default value if no status is set
-            $todo_status = !empty($todo_status) ? $todo_status : 'Not Started';
-        ?>
-        <select name="todo_status" id="todo_status" style="width:100%;">
-            <option value="Not Started"    <?php selected( $todo_status, 'Not Started' ); ?>>Not Started</option>
-            <option value="In Progress"   <?php selected( $todo_status, 'In Progress' ); ?>>In Progress</option>
-            <option value="Pending"  <?php selected( $todo_status, 'Pending' ); ?>>Pending</option>
-            <option value="In Review" <?php selected( $todo_status, 'In Review' ); ?>>In Review</option>
-            <option value="Completed" <?php selected( $todo_status, 'Completed' ); ?>>Completed</option>
-            <option value="Cancelled" <?php selected( $todo_status, 'Cancelled' ); ?>>Cancelled</option>
-        </select>
-    </p>
-    <p>
-        <label for="Priority">Priority:</label><br>
-        <?php
-            // Example: load priority from DB
-            // $todo_priority = get_post_meta( $post_id, 'todo_priority', true );
-
-            // Default to "Normal" if empty
-            $todo_priority = !empty($todo_priority) ? $todo_priority : 'Normal';
-        ?>
-        <select name="todo_priority" id="todo_priority" style="width:100%;">
-            <option value="Low"       <?php selected( $todo_priority, 'Low' ); ?>>Low</option>
-            <option value="Normal"    <?php selected( $todo_priority, 'Normal' ); ?>>Normal</option>
-            <option value="High"      <?php selected( $todo_priority, 'High' ); ?>>High</option>
-            <option value="Important"      <?php selected( $todo_priority, 'Important' ); ?>>Important</option>
-        </select>
-    </p>
-    <?php
+        case 'todo_priority':
+            $priority = get_post_meta($post->ID, '_todo_priority', true) ?: 'Normal';
+            $options = ['Low','Normal','High','Important'];
+            echo '<select name="todo_priority" style="width:100%">';
+            foreach ($options as $opt) {
+                echo '<option value="' . esc_attr( $opt ) . '" ' . selected( $priority, $opt, false ) . '>' . esc_html( $opt ) . '</option>';
+            }
+            echo '</select>';
+            break;
+    }
 }
+
 
 function wptodo_save_meta_box($post_id) {
     // Verify nonce
-    if (!isset($_POST['wptodo_add_meta_box_nonce_field']) ||
-        !wp_verify_nonce(sanitize_text_field(wp_unslash( $_POST['wptodo_add_meta_box_nonce_field'] )), 'wptodo_add_meta_box_nonce')) {
+    if (!isset($_POST['wp-todo_add_meta_box_nonce_field']) ||
+        !wp_verify_nonce(sanitize_text_field(wp_unslash( $_POST['wp-todo_add_meta_box_nonce_field'] )), 'wp-todo_add_meta_box_nonce')) {
         return;
     }
 
