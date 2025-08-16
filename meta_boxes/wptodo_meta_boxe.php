@@ -1,6 +1,6 @@
 <?php
 /**
- * About meta box Information
+ * Todo meta box Information
  *
  */
 function wptodo_add_meta_box() {

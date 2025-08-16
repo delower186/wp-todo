@@ -58,7 +58,7 @@ function wptodo_custom_post_type() {
       'menu_icon'             => 'dashicons-megaphone',
       'capability_type'       => 'post',
       'capabilities'          => array(),
-      'supports'              => array( 'title', 'editor', 'revisions' ),
+      'supports'              => array( 'title', 'editor', 'revisions', 'author', 'comments' ),
       'taxonomies'            => array(),
       'has_archive'           => true,
       'rewrite'               => array( 'slug' => 'wp-todo' ),

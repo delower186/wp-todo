@@ -17,4 +17,7 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 
     // Custom CSS for modal
     wp_add_inline_style( 'jquery-ui-css', '.wptodo-modal { display:none; }' );
+
+    // Custom CSS Style
+    wp_enqueue_style( "style", PLUGIN_DIR_URL ."assets/css/style.css", array(), "1.0", true );
 });
