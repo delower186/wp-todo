@@ -60,7 +60,7 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 == Changelog ==
 
 = 2.0.3 =
-
+* Comments added to todo details page
 
 
 = 2.0.2 =

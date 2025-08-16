@@ -108,3 +108,13 @@ add_action( 'admin_head', function() {
         .status-cancelled { background:#dc3545; color:#fff; padding:3px 6px; border-radius:4px; font-weight:bold; }
     </style>';
 });
+
+
+// remove comment column from the table
+add_filter( 'manage_wp-todo_posts_columns', function( $columns ) {
+    // Remove the comments column
+    if ( isset( $columns['comments'] ) ) {
+        unset( $columns['comments'] );
+    }
+    return $columns;
+});

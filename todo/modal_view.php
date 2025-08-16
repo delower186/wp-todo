@@ -1,4 +1,7 @@
 <?php 
+/**
+ * AJAX: Quick View Modal
+ */
 add_action( 'wp_ajax_wp-todo_quick_view', function() {
     $nonce = isset( $_POST['wp-todo_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['wp-todo_nonce'] ) ) : '';
     if ( ! wp_verify_nonce( $nonce, 'wp-todo_action' ) ) {
@@ -48,6 +51,7 @@ add_action( 'wp_ajax_wp-todo_quick_view', function() {
         <p><strong>Deadline:</strong> <?php echo esc_html($deadline); ?></p>
         <p><strong>Time Left:</strong> <?php echo esc_html($time_left); ?></p>
         <div><?php echo wp_kses_post($content); ?></div>
+
         <div id="wptodo-comments">
             <h3>Comments</h3>
             <?php
@@ -73,6 +77,9 @@ add_action( 'wp_ajax_wp-todo_quick_view', function() {
 });
 
 
+/**
+ * Admin Footer JS
+ */
 add_action( 'admin_footer-edit.php', function() {
     $screen = get_current_screen();
     if ( $screen->post_type !== 'wp-todo' ) return;
@@ -103,9 +110,13 @@ add_action( 'admin_footer-edit.php', function() {
                 if(response.success){
                     $('<div class="wptodo-modal"></div>').html(response.data).dialog({
                         modal: true,
-                        width: 600,
+                        width: 700,
                         title: 'Todo Details',
-                        close: function() { $(this).remove(); }
+                        open: function () {
+                            var maxH = Math.floor(window.innerHeight * 0.8);
+                            $(this).css({ maxHeight: maxH + 'px', overflowY: 'auto' });
+                        },
+                        close: function() { $(this).dialog('destroy').remove(); }
                     });
                 } else {
                     alert('Failed to load todo details.');
@@ -128,25 +139,51 @@ add_action( 'admin_footer-edit.php', function() {
         });
     });
     </script>
+    <style>
+      /* Scrollable modal */
+      .ui-dialog .ui-dialog-content.wptodo-modal {
+        max-height: calc(100vh - 160px) !important;
+        overflow-y: auto !important;
+        padding-right: 10px;
+      }
+      /* Scroll only comments if long */
+      #wptodo-comments {
+        max-height: 40vh;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        padding: 8px;
+        background: #fff;
+      }
+      .wptodo-comment { margin-bottom: 10px; }
+    </style>
     <?php
 });
 
+
+/**
+ * Enqueue scripts/styles
+ */
 add_action('admin_enqueue_scripts', function() {
     wp_enqueue_style('wp-admin');
 });
 
+
+/**
+ * AJAX: Add Comment
+ */
 add_action('wp_ajax_wp-todo_add_comment', function() {
-    $nonce = isset($_POST['nonce']) ? sanitize_text_field($_POST['nonce']) : '';
+    $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
     if ( ! wp_verify_nonce($nonce, 'wp-todo_action') ) {
         wp_send_json_error('Security check failed');
     }
 
+    $current_user = wp_get_current_user();
     $commentdata = array(
-        'comment_post_ID'      => intval($_POST['post_id']),
-        'comment_content'      => sanitize_textarea_field($_POST['comment']),
-        'user_id'              => get_current_user_id(),
-        'comment_author'       => wp_get_current_user()->display_name,
-        'comment_author_email' => wp_get_current_user()->user_email,
+        'comment_post_ID'      => isset($_POST['post_id']) ? intval($_POST['post_id']) : '',
+        'comment_content'      => isset($_POST['comment']) ? sanitize_textarea_field(wp_unslash($_POST['comment'])) : '',
+        'user_id'              => $current_user->ID,
+        'comment_author'       => $current_user->display_name,
+        'comment_author_email' => $current_user->user_email,
         'comment_approved'     => 1,
     );
 
@@ -169,7 +206,9 @@ add_action('wp_ajax_wp-todo_add_comment', function() {
 });
 
 
-// disable comments moderation for wp-todo CPT
+/**
+ * Disable moderation for wp-todo CPT
+ */
 add_filter('pre_comment_approved', function($approved, $commentdata) {
     if (isset($commentdata['comment_post_ID'])) {
         $post_type = get_post_type($commentdata['comment_post_ID']);
