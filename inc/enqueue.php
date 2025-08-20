@@ -21,3 +21,22 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
     // Custom CSS Style
     wp_enqueue_style( "style", PLUGIN_DIR_URL ."assets/css/style.css", array(), "1.0", true );
 });
+
+add_action('admin_enqueue_scripts', function($hook) {
+    if ($hook !== 'toplevel_page_wp-todo-dashboard') return;
+
+    // FullCalendar
+    wp_enqueue_style('fullcalendar-css', '//cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css', [], '6.1.8');
+    wp_enqueue_script('fullcalendar-js', '//cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js', [], '6.1.8', true);
+
+    // SortableJS for Kanban
+    wp_enqueue_script('sortable-js', '//cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js', [], '1.15.0', true);
+
+    // Custom dashboard script
+    wp_enqueue_script('wptodo-dashboard-js', PLUGIN_DIR_URL.'assets/js/wptodo-dashboard.js', ['jquery','fullcalendar-js','sortable-js'], '1.0', true);
+
+    wp_localize_script('wptodo-dashboard-js', 'wptodo_dashboard', [
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce'    => wp_create_nonce('wp-todo_dashboard'),
+    ]);
+});

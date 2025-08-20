@@ -16,8 +16,10 @@ add_action( 'wp_ajax_wp-todo_quick_view', function() {
 
     $assignee_id   = get_post_meta( $post_id, '_todo_assignee', true );
     $assignee_name = $assignee_id ? get_the_author_meta('display_name', $assignee_id) : '—';
-    $priority      = get_post_meta( $post_id, '_todo_priority', true ) ?: 'Normal';
-    $status        = get_post_meta( $post_id, '_todo_status', true ) ?: 'Not Started';
+    $priority_terms = wp_get_post_terms($post_id, 'todo_priority', ['fields' => 'names']);
+    $priority      = !empty($priority_terms) ? $priority_terms[0] : '-';
+    $status_terms   = wp_get_post_terms($post_id, 'todo_status', ['fields' => 'names']);
+    $status        = !empty($status_terms) ? $status_terms[0] : '-';
     $deadline      = get_post_meta( $post_id, '_todo_deadline', true ) ?: '—';
 
     $content = apply_filters('the_content', $post->post_content);

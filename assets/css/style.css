@@ -1,0 +1,22 @@
+#wp-todo-dashboard-card {
+    max-width: 1200px;    /* limit overall width */
+    margin: 20px auto;    /* center on page */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.kanban-board {
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.kanban-col {
+    min-width: 200px; /* keeps columns from stretching too wide */
+}
+
+#wp-todo-calendar {
+    margin-top: 30px;
+}
+

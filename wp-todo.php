@@ -43,3 +43,4 @@ include PLUGIN_DIR_PATH . "notification/notify.php";
 include PLUGIN_DIR_PATH . "inc/enqueue.php";
 include PLUGIN_DIR_PATH . "todo/modal_view.php";
 include PLUGIN_DIR_PATH . "todo/count_down_timer.php";
+include PLUGIN_DIR_PATH . "inc/dashboard.php";

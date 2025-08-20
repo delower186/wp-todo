@@ -1,7 +1,35 @@
 <?php
 /**
- * Todo meta box Information
- *
+ * Register custom taxonomies for Status & Priority
+ */
+function wptodo_register_taxonomies() {
+    // Status
+    register_taxonomy('todo_status', 'wp-todo', [
+        'labels' => [
+            'name'          => 'Statuses',
+            'singular_name' => 'Status',
+        ],
+        'public'       => false,
+        'show_ui'      => false, // hide default taxonomy meta box
+        'hierarchical' => false,
+    ]);
+
+    // Priority
+    register_taxonomy('todo_priority', 'wp-todo', [
+        'labels' => [
+            'name'          => 'Priorities',
+            'singular_name' => 'Priority',
+        ],
+        'public'       => false,
+        'show_ui'      => false, // hide default taxonomy meta box
+        'hierarchical' => false,
+    ]);
+}
+add_action('init', 'wptodo_register_taxonomies');
+
+
+/**
+ * Add custom meta boxes
  */
 function wptodo_add_meta_box() {
     add_meta_box('todo_deadline', 'Deadline', 'wptodo_meta_box_callback', 'wp-todo', 'normal', 'default');
@@ -11,13 +39,17 @@ function wptodo_add_meta_box() {
 }
 add_action('add_meta_boxes', 'wptodo_add_meta_box');
 
+
+/**
+ * Meta box content
+ */
 function wptodo_meta_box_callback($post, $meta) {
     wp_nonce_field('wp-todo_add_meta_box_nonce', 'wp-todo_add_meta_box_nonce_field');
 
     switch ($meta['id']) {
         case 'todo_deadline':
             $value = get_post_meta($post->ID, '_todo_deadline', true) ?: gmdate('Y-m-d');
-            echo '<input type="date" name="todo_deadline" value="'.esc_attr($value).'" style="width:100%;">';
+            echo '<input type="date" name="todo_deadline" value="' . esc_attr($value) . '" style="width:100%;">';
             break;
 
         case 'todo_assignee':
@@ -25,27 +57,29 @@ function wptodo_meta_box_callback($post, $meta) {
             $selected = get_post_meta($post->ID, '_todo_assignee', true) ?: get_current_user_id();
             echo '<select name="todo_assignee" style="width:100%">';
             foreach ($users as $user) {
-                echo '<option value="' . esc_attr( $user->ID ) . '" ' . selected( $selected, $user->ID, false ) . '>' . esc_html( $user->display_name ) . '</option>';
+                echo '<option value="' . esc_attr($user->ID) . '" ' . selected($selected, $user->ID, false) . '>' . esc_html($user->display_name) . '</option>';
             }
             echo '</select>';
             break;
 
         case 'todo_status':
-            $status = get_post_meta($post->ID, '_todo_status', true) ?: 'Not Started';
-            $options = ['Not Started','In Progress','Pending','In Review','Completed','Cancelled'];
+            $terms   = get_terms(['taxonomy' => 'todo_status', 'hide_empty' => false]);
+            $current = wp_get_post_terms($post->ID, 'todo_status', ['fields' => 'ids']);
+            $current = $current ? $current[0] : '';
             echo '<select name="todo_status" style="width:100%">';
-            foreach ($options as $opt) {
-                echo '<option value="' . esc_attr( $opt ) . '" ' . selected( $status, $opt, false ) . '>' . esc_html( $opt ) . '</option>';
+            foreach ($terms as $term) {
+                echo '<option value="' . esc_attr($term->term_id) . '" ' . selected($current, $term->term_id, false) . '>' . esc_html($term->name) . '</option>';
             }
             echo '</select>';
             break;
 
         case 'todo_priority':
-            $priority = get_post_meta($post->ID, '_todo_priority', true) ?: 'Normal';
-            $options = ['Low','Normal','High','Important'];
+            $terms   = get_terms(['taxonomy' => 'todo_priority', 'hide_empty' => false]);
+            $current = wp_get_post_terms($post->ID, 'todo_priority', ['fields' => 'ids']);
+            $current = $current ? $current[0] : '';
             echo '<select name="todo_priority" style="width:100%">';
-            foreach ($options as $opt) {
-                echo '<option value="' . esc_attr( $opt ) . '" ' . selected( $priority, $opt, false ) . '>' . esc_html( $opt ) . '</option>';
+            foreach ($terms as $term) {
+                echo '<option value="' . esc_attr($term->term_id) . '" ' . selected($current, $term->term_id, false) . '>' . esc_html($term->name) . '</option>';
             }
             echo '</select>';
             break;
@@ -53,31 +87,58 @@ function wptodo_meta_box_callback($post, $meta) {
 }
 
 
+/**
+ * Save meta box fields
+ */
 function wptodo_save_meta_box($post_id) {
-    // Verify nonce
     if (!isset($_POST['wp-todo_add_meta_box_nonce_field']) ||
-        !wp_verify_nonce(sanitize_text_field(wp_unslash( $_POST['wp-todo_add_meta_box_nonce_field'] )), 'wp-todo_add_meta_box_nonce')) {
+        !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['wp-todo_add_meta_box_nonce_field'])), 'wp-todo_add_meta_box_nonce')) {
         return;
     }
 
-    // Check autosave
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-
-    // Check permissions
     if (!current_user_can('edit_post', $post_id)) return;
 
-    // Save field
+    // Save deadline
     if (isset($_POST['todo_deadline'])) {
         update_post_meta($post_id, '_todo_deadline', sanitize_text_field(wp_unslash($_POST['todo_deadline'])));
     }
+
+    // Save assignee
     if (isset($_POST['todo_assignee'])) {
-        update_post_meta($post_id, '_todo_assignee', sanitize_text_field(wp_unslash($_POST['todo_assignee'])));
+        update_post_meta($post_id, '_todo_assignee', intval($_POST['todo_assignee']));
     }
+
+    // Save taxonomy terms
     if (isset($_POST['todo_status'])) {
-        update_post_meta($post_id, '_todo_status', sanitize_text_field(wp_unslash($_POST['todo_status'])));
+        wp_set_post_terms($post_id, [(int) $_POST['todo_status']], 'todo_status', false);
     }
     if (isset($_POST['todo_priority'])) {
-        update_post_meta($post_id, '_todo_priority', sanitize_text_field(wp_unslash($_POST['todo_priority'])));
+        wp_set_post_terms($post_id, [(int) $_POST['todo_priority']], 'todo_priority', false);
     }
 }
 add_action('save_post', 'wptodo_save_meta_box');
+
+
+/**
+ * Pre-populate default taxonomy terms on plugin/theme activation
+ */
+function wptodo_register_default_terms() {
+    // Statuses
+    $statuses = ['Not Started','In Progress','Pending','In Review','Completed','Cancelled'];
+    foreach ($statuses as $status) {
+        if (!term_exists($status, 'todo_status')) {
+            wp_insert_term($status, 'todo_status');
+        }
+    }
+
+    // Priorities
+    $priorities = ['Low','Normal','High','Important'];
+    foreach ($priorities as $priority) {
+        if (!term_exists($priority, 'todo_priority')) {
+            wp_insert_term($priority, 'todo_priority');
+        }
+    }
+}
+add_action('init', 'wptodo_register_default_terms');
+

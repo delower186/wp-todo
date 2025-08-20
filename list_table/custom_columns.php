@@ -35,7 +35,8 @@ add_action( 'manage_wp-todo_posts_custom_column', function( $column, $post_id  )
             break;
 
         case 'todo_priority':
-            $priority = get_post_meta( $post_id , '_todo_priority', true );
+            $priority_terms = wp_get_post_terms($post_id, 'todo_priority', ['fields' => 'names']);
+            $priority = !empty($priority_terms) ? $priority_terms[0] : '';
             $priority_class = '';
             switch ( strtolower( $priority ) ) {
                 case 'high': $priority_class = 'priority-high'; break;
@@ -47,7 +48,8 @@ add_action( 'manage_wp-todo_posts_custom_column', function( $column, $post_id  )
             break;
 
         case 'todo_status':
-            $status = get_post_meta( $post_id , '_todo_status', true );
+            $status_terms   = wp_get_post_terms($post_id, 'todo_status', ['fields' => 'names']);
+            $status = !empty($status_terms) ? $status_terms[0] : '';
             $status_class = '';
             switch ( strtolower( $status ) ) {
                 case 'not started': $status_class = 'status-not-started'; break;
