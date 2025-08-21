@@ -42,7 +42,7 @@ add_action( 'manage_wp-todo_posts_custom_column', function( $column, $post_id  )
                 case 'high': $priority_class = 'priority-high'; break;
                 case 'normal': $priority_class = 'priority-normal'; break;
                 case 'low': $priority_class = 'priority-low'; break;
-                case 'important': $priority_class = 'priority-important'; break;
+                case 'critical': $priority_class = 'priority-critical'; break;
             }
             echo '<span class="' . esc_attr($priority_class) . '">' . esc_html( $priority ) . '</span>';
             break;
@@ -54,10 +54,8 @@ add_action( 'manage_wp-todo_posts_custom_column', function( $column, $post_id  )
             switch ( strtolower( $status ) ) {
                 case 'not started': $status_class = 'status-not-started'; break;
                 case 'in progress': $status_class = 'status-in-progress'; break;
-                case 'pending': $status_class = 'status-pending'; break;
                 case 'in review': $status_class = 'status-in-review'; break;
                 case 'completed': $status_class = 'status-completed'; break;
-                case 'cancelled': $status_class = 'status-cancelled'; break;
             }
             echo '<span class="' . esc_attr($status_class) . '">' . esc_html( $status ) . '</span>';
             break;
@@ -99,15 +97,13 @@ add_action( 'admin_head', function() {
         .priority-high { color:#fff; background:#d9534f; padding:3px 6px; border-radius:4px; font-weight:bold; }
         .priority-normal { color:#fff; background:#5bc0de; padding:3px 6px; border-radius:4px; font-weight:bold; }
         .priority-low { color:#fff; background:#5bc0de; padding:3px 6px; border-radius:4px; font-weight:bold; }
-        .priority-important { color:#fff; background:#f0ad4e; padding:3px 6px; border-radius:4px; font-weight:bold; }
+        .priority-critical { color:#fff; background:#f0ad4e; padding:3px 6px; border-radius:4px; font-weight:bold; }
 
         /* Status */
         .status-not-started { background:#6c757d; color:#fff; padding:3px 6px; border-radius:4px; font-weight:bold; }
         .status-in-progress { background:#0275d8; color:#fff; padding:3px 6px; border-radius:4px; font-weight:bold; }
-        .status-pending { background:#fd7e14; color:#fff; padding:3px 6px; border-radius:4px; font-weight:bold; }
         .status-in-review { background:#17a2b8; color:#fff; padding:3px 6px; border-radius:4px; font-weight:bold; }
         .status-completed { background:#5cb85c; color:#fff; padding:3px 6px; border-radius:4px; font-weight:bold; }
-        .status-cancelled { background:#dc3545; color:#fff; padding:3px 6px; border-radius:4px; font-weight:bold; }
     </style>';
 });
 

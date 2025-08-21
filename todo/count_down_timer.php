@@ -7,7 +7,8 @@ add_filter( 'manage_wp-todo_posts_columns', function( $columns ) {
 add_action( 'manage_wp-todo_posts_custom_column', function( $column, $post_id ) {
     if ( $column === 'todo_deadline_countdown' ) {
         $deadline = get_post_meta( $post_id, '_todo_deadline', true );
-        $status   = get_post_meta( $post_id, '_todo_status', true );
+        $status_terms   = wp_get_post_terms($post_id, 'todo_status', ['fields' => 'names']);
+        $status   = !empty($status_terms) ? $status_terms[0] : '';
         if ( $deadline ) {
             echo '<span class="wptodo-countdown" data-deadline="'.esc_attr($deadline).'" data-status="'.esc_attr(strtolower($status)).'"></span>';
         } else {
@@ -72,11 +73,6 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 
                 if(status === 'completed') {
                     $(element).html('🎉').addClass('wptodo-completed');
-                    return;
-                }
-
-                if(status === 'cancelled') {
-                    $(element).html('😢').addClass('wptodo-cancelled');
                     return;
                 }
 

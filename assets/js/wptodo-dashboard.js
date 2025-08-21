@@ -9,7 +9,7 @@ jQuery(document).ready(function($){
         const todos = response.data;
 
         // === Kanban ===
-        const statuses = ['Not Started','In Progress','Pending','In Review','Completed','Cancelled'];
+        const statuses = ['Not Started','In Progress','In Review','Completed'];
         const kanbanContainer = $('#wptodo-kanban');
 
         statuses.forEach(status => {
@@ -39,24 +39,55 @@ jQuery(document).ready(function($){
 
         // Add todos as cards
         todos.forEach(todo => {
-            let color;
+            let cardColor, badgeColor;
             switch(todo.priority){
-                case 'Low': color='#d4edda'; break;
-                case 'Normal': color='#cce5ff'; break;
-                case 'High': color='#ffe5b4'; break;
-                case 'Important': color='#f8d7da'; break;
-                default: color='#f8f9fa';
+                case 'Low':
+                    cardColor  = '#d4edda';  // light green
+                    badgeColor = '#28a745';  // green
+                    break;
+                case 'Normal':
+                    cardColor  = '#cce5ff';  // light blue
+                    badgeColor = '#007bff';  // blue
+                    break;
+                case 'High':
+                    cardColor  = '#ffe5b4';  // light orange
+                    badgeColor = '#fd7e14';  // orange
+                    break;
+                case 'Critical':
+                    cardColor  = '#f8d7da';  // light red
+                    badgeColor = '#dc3545';  // red
+                    break;
+                default:
+                    cardColor  = '#f8f9fa';  // light gray
+                    badgeColor = '#6c757d';  // gray
             }
 
             const card = $(`
-                <div class="kanban-card" data-id="${todo.id}" style="background:${color};margin:5px;padding:10px;border-radius:5px;cursor:pointer;">
+                <div class="kanban-card" data-id="${todo.id}" 
+                    style="background:${cardColor};margin:5px;padding:10px;border-radius:5px;cursor:pointer;">
                     <strong>${todo.title}</strong><br>
-                    <small>${todo.priority} | ${todo.date}</small>
+                    <small>
+                        <span class="priority-label" 
+                            style="display:inline-block;padding:2px 6px;border-radius:4px;
+                                    background:${badgeColor};color:#fff;font-size:11px;">
+                            ${todo.priority}
+                        </span>
+                        ${
+                            todo.deadline 
+                                ? `<span class="deadline-label" 
+                                        style="display:inline-block;padding:2px 6px;margin-left:5px;
+                                                border-radius:4px;background:#dc3545;color:#fff;font-size:11px;">
+                                    ${todo.deadline}
+                                </span>` 
+                                : ""
+                        }
+                    </small>
                 </div>
             `);
 
             $(`.kanban-list[data-status="${todo.status}"]`).append(card);
         });
+
 
         // === Calendar ===
         const calendarEl = document.createElement('div');

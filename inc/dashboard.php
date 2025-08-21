@@ -64,6 +64,7 @@ add_action('wp_ajax_get_todos', function() {
             'status'   => $status_terms ? $status_terms[0] : 'Not Started',
             'priority' => $priority_terms ? $priority_terms[0] : 'Normal',
             'date'     => get_the_date('Y-m-d', $todo->ID),
+            'deadline'=> get_post_meta($todo->ID, '_todo_deadline', true),
         ];
     }
 
@@ -77,7 +78,7 @@ add_action('wp_ajax_update_todo_status', function() {
     check_ajax_referer('wp-todo_dashboard', 'nonce');
 
     $todo_id = isset($_POST['todo_id']) ? intval($_POST['todo_id']) : 0;
-    $status  = isset($_POST['status']) ? sanitize_text_field($_POST['status']) : '';
+    $status  = isset($_POST['status']) ? sanitize_text_field(wp_unslash($_POST['status'])) : '';
 
     if (!$todo_id || !$status) {
         wp_send_json_error('Invalid data');

@@ -16,9 +16,11 @@ WP-Todo is a powerful WordPress plugin that allows you to create, manage, and tr
 
 == Features ==
 * **Brand new design & re-developed from scratch - More Features comming soon!**
+* Kanban board
+* FullCalendar
 * Create and manage tasks and to-do lists
-* Assign priorities (High, Medium, Low) to tasks
-* Set statuses (Not Started, In Progress, On Hold, Review, Completed, Cancelled)
+* Assign priorities (Critical, High, Normal, Low) to tasks
+* Set statuses (Not Started, In Progress, In Review, Completed)
 * Add deadlines for timely task completion
 * Track milestones and progress
 * Collaborate with team members using comments
@@ -38,9 +40,25 @@ Whether you are managing personal tasks or complex project workflows, WP-Todo ma
 == Contribute ==
 This may have bugs and lack of many features. If you want to contribute on this project, you are more than welcome. Please fork the repository from [Github](https://github.com/delower186/wp-todo).
 
-== Donate ==
-Please [donate]() for this awesome plugin to continue it's development to bring more awesome features.
+== Custom Development & Feature Requests ==
 
+Need a custom feature or want to enhance Project Manager to fit your workflow?  
+I provide custom WordPress plugin development, feature requests, and tailored solutions to make your project management seamless.
+
+= Contact for Custom Development =
+🌐 Website: [https://sandalia.com.bd/apps](https://sandalia.com.bd/apps)  
+💼 Upwork: [Upwork](https://www.upwork.com/freelancers/delower)
+💼 Linkedin: [Linkedin](https://www.linkedin.com/in/delower186/)
+
+= Do You need any Data Scraping Services? Try =
+🌐 Marketplace: [SandaliaApps](https://apify.com/sandaliaapps)
+
+== Try My Other Plugins ==
+
+If you like **WP To Do**, you might also enjoy my other plugins:
+
+= [Project Manager Pro](https://wordpress.org/plugins/project-manager-pro) =
+Project Manager Pro is perfect for freelancers, small teams, or anyone who wants to manage projects directly from their WordPress admin panel without needing external tools.
 
 == Frequently Asked Questions ==
 

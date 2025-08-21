@@ -125,7 +125,7 @@ add_action('save_post', 'wptodo_save_meta_box');
  */
 function wptodo_register_default_terms() {
     // Statuses
-    $statuses = ['Not Started','In Progress','Pending','In Review','Completed','Cancelled'];
+    $statuses = ['Not Started','In Progress','In Review','Completed'];
     foreach ($statuses as $status) {
         if (!term_exists($status, 'todo_status')) {
             wp_insert_term($status, 'todo_status');
@@ -133,7 +133,7 @@ function wptodo_register_default_terms() {
     }
 
     // Priorities
-    $priorities = ['Low','Normal','High','Important'];
+    $priorities = ['Low','Normal','High','Critical'];
     foreach ($priorities as $priority) {
         if (!term_exists($priority, 'todo_priority')) {
             wp_insert_term($priority, 'todo_priority');
