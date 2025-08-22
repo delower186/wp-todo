@@ -3,7 +3,7 @@ Contributors: delower186
 Tags: to-do list, task management, project management, WordPress project manager, productivity
 Requires at least: 6.4 or higher
 Tested up to: 6.8
-Stable tag: 2.0.3
+Stable tag: 2.1.0
 Requires PHP: 7.2.24
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -15,7 +15,6 @@ WP-Todo is a powerful WordPress plugin that allows you to create, manage, and tr
 
 
 == Features ==
-* **Brand new design & re-developed from scratch - More Features comming soon!**
 * Kanban board
 * FullCalendar
 * Create and manage tasks and to-do lists
@@ -35,7 +34,7 @@ Whether you are managing personal tasks or complex project workflows, WP-Todo ma
 3. Navigate to the WP-Todo menu in the dashboard to start creating and managing tasks.
 
 == Detailed Walkthrough ==
-[youtube https://youtu.be/KQF2ouZ1mJM]
+[youtube https://youtu.be/d6pcudlgMP4]
 
 == Contribute ==
 This may have bugs and lack of many features. If you want to contribute on this project, you are more than welcome. Please fork the repository from [Github](https://github.com/delower186/wp-todo).
@@ -77,7 +76,9 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 
 == Changelog ==
 
-= 2.0.3 =
+= 2.1.0 =
+* Kanban board added
+* FullCalendar added
 * Comments added to todo details page
 
 
