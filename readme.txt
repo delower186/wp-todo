@@ -3,7 +3,7 @@ Contributors: delower186
 Tags: to-do list, task management, project management, WordPress project manager, productivity
 Requires at least: 6.4 or higher
 Tested up to: 6.8
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 Requires PHP: 7.2.24
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -54,9 +54,8 @@ I provide custom WordPress plugin development, feature requests, and tailored so
 
 == Try My Other Plugins ==
 
-If you like **WP To Do**, you might also enjoy my other plugins:
-
-= [Project Manager Pro](https://wordpress.org/plugins/project-manager-pro) =
+= If you like **WP To Do**, you might also enjoy my other plugins: =
+Comming Soon: [Project Manager Pro](https://wordpress.org/plugins/project-manager-pro)
 Project Manager Pro is perfect for freelancers, small teams, or anyone who wants to manage projects directly from their WordPress admin panel without needing external tools.
 
 == Frequently Asked Questions ==
@@ -75,6 +74,9 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 
 
 == Changelog ==
+
+= 2.1.1 =
+* readme.txt updated
 
 = 2.1.0 =
 * Kanban board added
