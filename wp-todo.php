@@ -32,15 +32,19 @@ Copyright (C) 2025  delower.
 */
 defined('ABSPATH') or die('Hey, What are you doing here? You Silly Man!');
 
-define('PLUGIN_DIR_PATH', plugin_dir_path( __FILE__));
-define('PLUGIN_DIR_URL', plugin_dir_url( __FILE__));
+// Define version constant so Pro plugin can detect it
+define( 'WP_TODO_VERSION', '2.1.1' );
+
+define('WP_TODO_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__));
+define('WP_TODO_PLUGIN_DIR_URL', plugin_dir_url( __FILE__));
 
 
-include PLUGIN_DIR_PATH . "todo/wptodo_custom_post_type.php";
-include PLUGIN_DIR_PATH . "meta_boxes/wptodo_meta_boxe.php";
-include PLUGIN_DIR_PATH . "list_table/custom_columns.php";
-include PLUGIN_DIR_PATH . "notification/notify.php";
-include PLUGIN_DIR_PATH . "inc/enqueue.php";
-include PLUGIN_DIR_PATH . "todo/modal_view.php";
-include PLUGIN_DIR_PATH . "todo/count_down_timer.php";
-include PLUGIN_DIR_PATH . "inc/dashboard.php";
+include WP_TODO_PLUGIN_DIR_PATH . "todo/wptodo_custom_post_type.php";
+include WP_TODO_PLUGIN_DIR_PATH . "meta_boxes/wptodo_meta_boxe.php";
+include WP_TODO_PLUGIN_DIR_PATH . "list_table/custom_columns.php";
+include WP_TODO_PLUGIN_DIR_PATH . "notification/notify.php";
+include WP_TODO_PLUGIN_DIR_PATH . "inc/enqueue.php";
+include WP_TODO_PLUGIN_DIR_PATH . "todo/modal_view.php";
+include WP_TODO_PLUGIN_DIR_PATH . "todo/count_down_timer.php";
+include WP_TODO_PLUGIN_DIR_PATH . "inc/dashboard.php";
+include WP_TODO_PLUGIN_DIR_PATH . "inc/pro/pro-integration.php";
