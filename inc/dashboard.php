@@ -57,15 +57,19 @@ add_action('wp_ajax_get_todos', function() {
     foreach ($todos as $todo) {
         $status_terms = wp_get_post_terms($todo->ID, 'todo_status', ['fields' => 'names']);
         $priority_terms = wp_get_post_terms($todo->ID, 'todo_priority', ['fields' => 'names']);
+        $deadline       = get_post_meta($todo->ID, '_todo_deadline', true);
 
-        $data[] = [
+        // Allow Pro (or others) to modify extra meta for each card/event
+        $extra_meta = apply_filters('wp_todo_todo_extra_meta', [], $todo->ID);
+
+        $data[] = array_merge([
             'id'       => $todo->ID,
             'title'    => esc_html(get_the_title($todo)),
             'status'   => $status_terms ? $status_terms[0] : 'Not Started',
             'priority' => $priority_terms ? $priority_terms[0] : 'Normal',
             'date'     => get_the_date('Y-m-d', $todo->ID),
-            'deadline'=> get_post_meta($todo->ID, '_todo_deadline', true),
-        ];
+            'deadline' => $deadline,
+        ], $extra_meta);
     }
 
 
@@ -86,6 +90,13 @@ add_action('wp_ajax_update_todo_status', function() {
 
 
     wp_set_post_terms($todo_id, [$status], 'todo_status', false);
+
+
+    // Only trigger Pro hook if completed
+    if ($status === 'Completed') {
+        // Trigger recurrence check
+        do_action('wp_todo_task_completed', $todo_id, $status);
+    }
 
     wp_send_json_success('Status updated');
 });

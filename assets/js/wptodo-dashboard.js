@@ -10,7 +10,7 @@ jQuery(document).ready(function($){
 
         // === Kanban ===
         const statuses = ['Not Started','In Progress','In Review','Completed'];
-        const kanbanContainer = $('#wptodo-kanban');
+        const kanbanContainer = $('#wptodo-kanban').empty();
 
         statuses.forEach(status => {
             const col = $('<div class="kanban-col" style="flex:1;border:1px solid #ddd;padding:10px;border-radius:5px;background:#f9f9f9;"></div>');
@@ -39,27 +39,27 @@ jQuery(document).ready(function($){
 
         // Add todos as cards
         todos.forEach(todo => {
-            let cardColor, badgeColor;
+            // Card color based on priority
+            let cardColor = '#f8f9fa', priorityBadge = '';
             switch(todo.priority){
-                case 'Low':
-                    cardColor  = '#d4edda';  // light green
-                    badgeColor = '#28a745';  // green
-                    break;
-                case 'Normal':
-                    cardColor  = '#cce5ff';  // light blue
-                    badgeColor = '#007bff';  // blue
-                    break;
-                case 'High':
-                    cardColor  = '#ffe5b4';  // light orange
-                    badgeColor = '#fd7e14';  // orange
-                    break;
-                case 'Critical':
-                    cardColor  = '#f8d7da';  // light red
-                    badgeColor = '#dc3545';  // red
-                    break;
-                default:
-                    cardColor  = '#f8f9fa';  // light gray
-                    badgeColor = '#6c757d';  // gray
+                case 'Low':    cardColor='#d4edda'; priorityBadge='green'; break;
+                case 'Normal': cardColor='#cce5ff'; priorityBadge='blue'; break;
+                case 'High':   cardColor='#ffe5b4'; priorityBadge='orange'; break;
+                case 'Critical': cardColor='#f8d7da'; priorityBadge='red'; break;
+            }
+
+            // Recurring badge if exists
+            let recurringBadge = '';
+            if(todo.recurring) {
+                recurringBadge = `<span class="recurring-badge" 
+                    style="background:#ff9800;color:#fff;padding:2px 5px;border-radius:3px;font-size:11px;margin-left:5px;">${todo.recurring_label}</span>`;
+            }
+
+            // Deadline badge
+            let deadlineBadge = '';
+            if(todo.deadline) {
+                deadlineBadge = `<span class="deadline-badge" 
+                    style="background:#dc3545;color:#fff;padding:2px 5px;border-radius:3px;font-size:11px;margin-left:5px;">${todo.deadline}</span>`;
             }
 
             const card = $(`
@@ -69,38 +69,88 @@ jQuery(document).ready(function($){
                     <small>
                         <span class="priority-label" 
                             style="display:inline-block;padding:2px 6px;border-radius:4px;
-                                    background:${badgeColor};color:#fff;font-size:11px;">
+                                   background:${priorityBadge};color:#fff;font-size:11px;">
                             ${todo.priority}
                         </span>
-                        ${
-                            todo.deadline 
-                                ? `<span class="deadline-label" 
-                                        style="display:inline-block;padding:2px 6px;margin-left:5px;
-                                                border-radius:4px;background:#dc3545;color:#fff;font-size:11px;">
-                                    ${todo.deadline}
-                                </span>` 
-                                : ""
-                        }
+                        ${deadlineBadge}
+                        ${recurringBadge}
                     </small>
                 </div>
             `);
 
             $(`.kanban-list[data-status="${todo.status}"]`).append(card);
         });
-
-
+        
         // === Calendar ===
         const calendarEl = document.createElement('div');
-        $('#wptodo-calendar').append(calendarEl);
+        $('#wptodo-calendar').empty().append(calendarEl);
 
         const calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             height: 600,
-            events: todos.map(todo => ({
-                id: todo.id,
-                title: todo.title,
-                start: todo.date,
-            }))
+            events: todos.map(todo => {
+                let startDate = todo.date || todo.deadline;
+                let endDate = todo.deadline || todo.date;
+
+                // Add 1 day to make FullCalendar include the deadline
+                if (endDate) {
+                    let end = new Date(endDate);
+                    end.setDate(end.getDate() + 1);
+                    endDate = end.toISOString().split('T')[0]; // convert back to YYYY-MM-DD
+                }
+
+                return {
+                    id: todo.id,
+                    title: todo.title,
+                    start: startDate,
+                    end: endDate,
+                    extendedProps: {
+                        priority: todo.priority,
+                        recurring: todo.recurring,
+                        deadline: todo.deadline
+                    }
+                };
+            }),
+            eventDidMount: function(info) {
+                // Set event background based on priority
+                const priorityColors = {
+                    'Low': '#28a745',
+                    'Normal': '#007bff',
+                    'High': '#fd7e14',
+                    'Critical': '#dc3545'
+                };
+                const bgColor = priorityColors[info.event.extendedProps.priority] || '#6c757d';
+                info.el.style.backgroundColor = bgColor;
+                info.el.style.color = '#fff'; // ensure text contrast
+
+                // Remove default text color for badges
+                const el = info.el.querySelector('.fc-event-title');
+                if(!el) return;
+
+                // Priority badge (white bg, black text)
+                if(info.event.extendedProps.priority){
+                    const span = document.createElement('span');
+                    span.style.cssText = 'background:#670B9C;color:#fff;padding:2px 5px;margin-left:5px;border-radius:3px;font-size:11px;';
+                    span.textContent = info.event.extendedProps.priority;
+                    el.appendChild(span);
+                }
+
+                // Recurring badge (white bg, black text)
+                if(info.event.extendedProps.recurring){
+                    const span = document.createElement('span');
+                    span.style.cssText = 'background:#3F9B0B;color:#fff;padding:2px 5px;margin-left:5px;border-radius:3px;font-size:11px;';
+                    span.textContent = 'Recurring';
+                    el.appendChild(span);
+                }
+
+                // Deadline badge (white bg, black text)
+                if(info.event.extendedProps.deadline){
+                    const span = document.createElement('span');
+                    span.style.cssText = 'background:#1589FF;color:#fff;padding:2px 5px;margin-left:5px;border-radius:3px;font-size:11px;';
+                    span.textContent = info.event.extendedProps.deadline;
+                    el.appendChild(span);
+                }
+            }
         });
         calendar.render();
     });
