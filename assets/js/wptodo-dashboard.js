@@ -48,18 +48,31 @@ jQuery(document).ready(function($){
                 case 'Critical': cardColor='#f8d7da'; priorityBadge='red'; break;
             }
 
-            // Recurring badge if exists
+            // Check overdue
+            let isOverdue = false;
+            if (todo.deadline) {
+                const today = new Date();
+                const deadlineDate = new Date(todo.deadline + 'T23:59:59'); // Ensure full day
+                isOverdue = deadlineDate < today;
+            }
+
+            // Recurring badge with overdue color
             let recurringBadge = '';
-            if(todo.recurring) {
+            if (todo.recurring) {
+                let bgColor = isOverdue && todo.status !== "Completed" ? '#dc3545' : '#3F9B0B'; // Red if overdue, green otherwise
                 recurringBadge = `<span class="recurring-badge" 
-                    style="background:#ff9800;color:#fff;padding:2px 5px;border-radius:3px;font-size:11px;margin-left:5px;">${todo.recurring_label}</span>`;
+                    style="background:${bgColor};color:#fff;padding:2px 5px;border-radius:3px;font-size:11px;margin-left:5px;">
+                    ${todo.recurring_label}
+                </span>`;
             }
 
             // Deadline badge
             let deadlineBadge = '';
             if(todo.deadline) {
                 deadlineBadge = `<span class="deadline-badge" 
-                    style="background:#dc3545;color:#fff;padding:2px 5px;border-radius:3px;font-size:11px;margin-left:5px;">${todo.deadline}</span>`;
+                    style="background:#dc3545;color:#fff;padding:2px 5px;border-radius:3px;font-size:11px;margin-left:5px;">
+                    ${todo.deadline}
+                </span>`;
             }
 
             const card = $(`
@@ -80,7 +93,7 @@ jQuery(document).ready(function($){
 
             $(`.kanban-list[data-status="${todo.status}"]`).append(card);
         });
-        
+
         // === Calendar ===
         const calendarEl = document.createElement('div');
         $('#wptodo-calendar').empty().append(calendarEl);

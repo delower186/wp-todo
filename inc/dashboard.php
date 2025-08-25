@@ -59,6 +59,7 @@ add_action('wp_ajax_get_todos', function() {
         $priority_terms = wp_get_post_terms($todo->ID, 'todo_priority', ['fields' => 'names']);
         $deadline       = get_post_meta($todo->ID, '_todo_deadline', true);
 
+
         // Allow Pro (or others) to modify extra meta for each card/event
         $extra_meta = apply_filters('wp_todo_todo_extra_meta', [], $todo->ID);
 
@@ -95,8 +96,9 @@ add_action('wp_ajax_update_todo_status', function() {
     // Only trigger Pro hook if completed
     if ($status === 'Completed') {
         // Trigger recurrence check
-        do_action('wp_todo_task_completed', $todo_id, $status);
+        do_action('wp_todo_task_completed', $todo_id);
     }
+
 
     wp_send_json_success('Status updated');
 });
