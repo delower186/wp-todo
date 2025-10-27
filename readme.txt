@@ -1,6 +1,6 @@
 === WP To Do ===
 Contributors: delower186
-Tags: to-do list, task management, project management, WordPress project manager, productivity
+Tags: to-do list, to do management, checklist, tasks, office memo
 Requires at least: 6.4 or higher
 Tested up to: 6.8
 Stable tag: 2.1.2
@@ -8,25 +8,38 @@ Requires PHP: 7.2.24
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WP-Todo: A full-featured WordPress plugin to create, manage, and track tasks with custom statuses, priorities, and deadlines from your dashboard.
+# WP-Todo: Smart To-Do List & Task Management Plugin for WordPress
 
 == Description ==
-WP-Todo is a powerful WordPress plugin that allows you to create, manage, and track tasks effortlessly. It’s perfect for individuals, teams, and businesses looking to stay organized and boost productivity. Features include:
+**WP-Todo** is a full-featured **to-do list** and **task management** plugin for WordPress that helps you stay organized, manage priorities, and boost productivity — all from your WordPress dashboard.
 
+Perfect for individuals, teams, and businesses, WP-Todo lets you easily create, organize, and track your **tasks**, **checklists**, and **office memos** in one place. Whether you're planning daily work, managing projects, or tracking milestones, WP-Todo brings simple yet powerful **to do management** directly into your site.
+
+Stay productive, meet deadlines, and manage your workflow seamlessly — without leaving WordPress.
 
 == Features ==
-* Kanban board
-* FullCalendar
-* Create and manage tasks and to-do lists
-* Assign priorities (Critical, High, Normal, Low) to tasks
-* Set statuses (Not Started, In Progress, In Review, Completed)
-* Add deadlines for timely task completion
-* Track milestones and progress
-* Collaborate with team members using comments
-* Color-coded tasks for quick visual reference
-* Easy-to-use interface integrated into the WordPress dashboard
+✅ **Powerful Task Management**
+- Create and manage unlimited **to-do lists** and **tasks**
+- Assign priorities (Critical, High, Normal, Low)
+- Define statuses (Not Started, In Progress, In Review, Completed)
+- Add deadlines to ensure on-time completion
 
-Whether you are managing personal tasks or complex project workflows, WP-Todo makes task management simple and effective.
+✅ **Visual Workflow Tools**
+- Interactive **Kanban Board** for drag-and-drop task organization  
+- **FullCalendar** integration for scheduling and timeline view  
+- Track milestones and progress visually  
+
+✅ **Collaboration & Productivity**
+- Add comments for better team communication  
+- Use color-coded tasks for quick identification  
+- Manage **checklists** and **office memos** in one unified dashboard  
+
+✅ **User-Friendly Interface**
+- Clean, responsive design integrated into the WordPress admin  
+- Lightweight, fast, and easy to use  
+
+== Why Choose WP To do? ==
+Whether you’re managing personal tasks, planning your team’s projects, or keeping track of important office notes, **WP-Todo** makes **to-do management** simple, efficient, and visually intuitive. Turn your WordPress dashboard into a productivity hub and never miss a deadline again.
 
 == Installation ==
 1. Upload the `wp-todo` folder to the `/wp-content/plugins/` directory.
@@ -44,19 +57,27 @@ This may have bugs and lack of many features. If you want to contribute on this 
 Need a custom feature or want to enhance Project Manager to fit your workflow?  
 I provide custom WordPress plugin development, feature requests, and tailored solutions to make your project management seamless.
 
+== Custom Development & Feature Requests ==
+
+Need a custom feature or want to enhance Project Manager to fit your workflow?  
+I provide custom WordPress plugin development, feature requests, and tailored solutions to make your project management seamless.
+
 = Contact for Custom Development =
 🌐 Website: [https://sandalia.com.bd/apps](https://sandalia.com.bd/apps)  
-💼 Upwork: [Upwork](https://www.upwork.com/freelancers/delower)
-💼 Linkedin: [Linkedin](https://www.linkedin.com/in/delower186/)
+💼 Upwork (Delower): [https://www.upwork.com/freelancers/delower](https://www.upwork.com/freelancers/delower)
+💼 Linkedin (Delower): [https://www.linkedin.com/in/delower186/](https://www.linkedin.com/in/delower186/)
+💼 Linkedin (Sandalia): [https://www.linkedin.com/company/sandalia-apps/](https://www.linkedin.com/company/sandalia-apps/)
 
 = Do You need any Data Scraping Services? Try =
-🌐 Marketplace: [SandaliaApps](https://apify.com/sandaliaapps)
+🌐 Marketplace: [https://apify.com/sandaliaapps](https://apify.com/sandaliaapps)
 
 == Try My Other Plugins ==
 
-= If you like **WP To Do**, you might also enjoy my other plugins: =
-Comming Soon: [Project Manager Pro](https://wordpress.org/plugins/project-manager-pro)
-Project Manager Pro is perfect for freelancers, small teams, or anyone who wants to manage projects directly from their WordPress admin panel without needing external tools.
+= Project Manager Pro =
+[Project Manager Pro](https://wordpress.org/plugins/project-manager-pro/) is a lightweight and easy-to-use plugin that allows you to create, manage, and track projects and tasks directly within WordPress.
+
+= LLMs.txt Sitemap Manager =
+[LLMs.txt Sitemap Manager](https://wordpress.org/plugins/llms-txt-sitemap-manager/) automatically generates an **LLMs.txt file** — a structured, lightweight list of important public URLs from your site — specifically designed for **Large Language Models (LLMs)** like ChatGPT, Perplexity, Claude, and other AI systems.  
 
 == Frequently Asked Questions ==
 
@@ -74,6 +95,11 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 
 
 == Changelog ==
+
+= 2.1.2 =
+* Tasks automatically added to FullCalendar
+* Status tag added
+* readme.txt updated
 
 = 2.1.1 =
 * readme.txt updated
