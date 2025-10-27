@@ -3,7 +3,7 @@ Contributors: delower186
 Tags: to-do list, to do management, checklist, tasks, office memo
 Requires at least: 6.4 or higher
 Tested up to: 6.8
-Stable tag: 2.1.2
+Stable tag: 2.1.5
 Requires PHP: 7.2.24
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -96,7 +96,7 @@ A. Found any bugs? Please create an [issue](https://github.com/delower186/wp-tod
 
 == Changelog ==
 
-= 2.1.2 =
+= 2.1.6 =
 * Tasks automatically added to FullCalendar
 * Status tag added
 * readme.txt updated
