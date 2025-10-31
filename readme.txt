@@ -1,9 +1,9 @@
 === WP To Do ===
 Contributors: delower186
-Tags: to-do list, to do management, checklist, tasks, office memo
+Tags: to-do list, to do management, checklist, tasks, projects
 Requires at least: 6.4 or higher
 Tested up to: 6.8
-Stable tag: 2.1.6
+Stable tag: 2.1.7
 Requires PHP: 7.2.24
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -11,9 +11,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 # WP-Todo: Smart To-Do List & Task Management Plugin for WordPress
 
 == Description ==
-**WP-Todo** is a full-featured **to-do list** and **task management** plugin for WordPress that helps you stay organized, manage priorities, and boost productivity — all from your WordPress dashboard.
+**WP To Do** is a full-featured **to-do list** and **task management** plugin for WordPress that helps you stay organized, manage priorities, and boost productivity — all from your WordPress dashboard.
 
-Perfect for individuals, teams, and businesses, WP-Todo lets you easily create, organize, and track your **tasks**, **checklists**, and **office memos** in one place. Whether you're planning daily work, managing projects, or tracking milestones, WP-Todo brings simple yet powerful **to do management** directly into your site.
+Perfect for individuals, teams, and businesses, WP To Do lets you easily create, organize, and track your **tasks**, **checklists**, and **office memos** in one place. Whether you're planning daily work, managing projects, or tracking milestones, WP To Do brings simple yet powerful **to do management** directly into your site.
 
 Stay productive, meet deadlines, and manage your workflow seamlessly — without leaving WordPress.
 
@@ -51,11 +51,6 @@ Whether you’re managing personal tasks, planning your team’s projects, or ke
 
 == Contribute ==
 This may have bugs and lack of many features. If you want to contribute on this project, you are more than welcome. Please fork the repository from [Github](https://github.com/delower186/wp-todo).
-
-== Custom Development & Feature Requests ==
-
-Need a custom feature or want to enhance Project Manager to fit your workflow?  
-I provide custom WordPress plugin development, feature requests, and tailored solutions to make your project management seamless.
 
 == Custom Development & Feature Requests ==
 
